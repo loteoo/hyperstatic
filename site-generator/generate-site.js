@@ -7,7 +7,6 @@ import { getMatch } from './Router'
 import fs from 'fs'
 import init from '../src/init'
 
-global.requestAnimationFrame = cb => cb()
 
 const skeletton = fs.readFileSync('../dist/index.html')
 
