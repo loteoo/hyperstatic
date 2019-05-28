@@ -5,7 +5,7 @@ export default {
     description: '1 kB JavaScript micro-framework for building declarative web applications'
   },
   location: {
-    path: '',
+    path: '/',
     params: {},
     queryParams: {}
   }

@@ -1,13 +1,14 @@
 import { h } from 'hyperapp'
 
-import Home from './pages/index'
+import Router from '../site-generator/Router'
 
 
 
-// Root view
+// root view
 export default state => (
   <div>
-    App here
-    {state.location.path === '' && Home(state)}
+    Root app view
+    {Router(state)}
   </div>
 )
+
