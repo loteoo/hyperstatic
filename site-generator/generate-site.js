@@ -19,8 +19,8 @@ Object.keys(routes).forEach(route => {
   // Setup page state with proper route
   const state = {
     ...init,
-    meta: {
-      ...init.meta,
+    location: {
+      ...init.location,
       path: route
     }
   }
