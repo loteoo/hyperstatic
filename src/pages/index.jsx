@@ -1,7 +1,7 @@
 import { h } from 'hyperapp'
 
 // Import actions
-import { SetValue } from './actions'
+import { SetValue } from '../actions'
 
 const targetValue = event => event.target.value
 
@@ -11,19 +11,20 @@ const container = {
   padding: '1rem'
 }
 
-// Root view
+// Home page
 export default state => (
   <main style={container}>
-    <h1>{state.title}</h1>
-    <p>{state.description}</p>
+    <h2>Home page</h2>
+    <h1>{state.meta.title}</h1>
+    <p>{state.meta.description}</p>
     <input
       type="text"
-      value={state.title}
+      value={state.meta.title}
       oninput={[SetValue, ev => ({ key: 'title', value: targetValue(ev) })]}
     />
     <input
       type="text"
-      value={state.description}
+      value={state.meta.description}
       oninput={[SetValue, ev => ({ key: 'description', value: targetValue(ev) })]}
     />
     <h4>State: </h4>

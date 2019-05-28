@@ -5,8 +5,8 @@ import 'sanitize.css'
 import './global.css'
 
 // Import app
-import init from './app/init'
-import view from './app/view'
+import init from './init'
+import view from './view'
 
 // Initialize the app
 app({ init, view, node: document.body })
