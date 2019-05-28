@@ -1,0 +1,30 @@
+{
+  "short_name": "Hyperapp",
+  "name": "Hyperapp boilerplate",
+  "description": "Hyperapp starter kit with development on steroids",
+  "display": "fullscreen",
+  "scope": "/",
+  "start_url": "/",
+  "theme_color": "white",
+  "background_color": "white",
+  "orientation": "portrait",
+  "dir": "ltr",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "./assets/icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

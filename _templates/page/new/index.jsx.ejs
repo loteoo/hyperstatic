@@ -1,0 +1,10 @@
+---
+to: src/app/pages/<%= h.inflection.camelize(name.replace(/\s/g, '_')) %>.jsx
+---
+import { h } from 'hyperapp'
+
+export default props => (
+  <div>
+    New <%= name %> component!
+  </div>
+)

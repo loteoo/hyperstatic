@@ -1,0 +1,33 @@
+/*------------------------------------*\
+  Global css
+\*------------------------------------*/
+
+/* === Global variables === */
+:root {
+	--background-color: #ffffff;
+	--alt-background-color: #f4f4f4;
+	--text-color: #111;
+  --accent-color: #4641FF;
+  --border-color: #eee;
+  --success-color: #06d19c;
+  --danger-color: tomato;
+}
+
+/* === Default cascade === */
+html {
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-display: swap;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+}
+
+::selection {
+	background: var(--accent-color);
+	color: var(--background-color);
+}
