@@ -15,3 +15,25 @@ on build time, read markdown files & build json files for them, allow pre-render
 <html> should be jsx  
   
 
+build on top of official HA router
+
+all sites have, overall, the same state structure :  
+
+```
+export default {
+  meta: {
+    title: 'Meta title',
+    description: 'asdasd',
+  },
+  location: {
+    path: '/asd',
+    params: {},
+    queryParams: {}
+  },
+  pages: {
+    [page-slug]: {
+      ...<page data here>
+    }
+  }
+}
+```
