@@ -12,11 +12,11 @@
   },
   "dependencies": {
     "@hyperapp/time": "0.0.10",
-    "hyperapp": "^2.0.0-beta.12",
-    "sanitize.css": "^8.0.0"
+    "hyperapp": "^2.0.0-beta.22",
+    "sanitize.css": "^8.0.1"
   },
   "devDependencies": {
-    "autoprefixer": "^9.5.1",
+    "autoprefixer": "^9.6.0",
     "babel-eslint": "^10.0.1",
     "hygen": "^4.0.2",
     "parcel-bundler": "^1.12.3",

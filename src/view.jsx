@@ -11,9 +11,9 @@ import {SetPath} from './actions'
 export default state => (
   <div>
     {Object.keys(state.routes).map(route => (
-      <button onclick={[SetPath, route]}>{route}</button>
+      <button onmousedown={[SetPath, route]}>{route}</button>
     ))}
-    <button onclick={[SetPath, "404"]}>404</button>
+    <button onmousedown={[SetPath, "404"]}>404</button>
     Root app view.
     Pages:
     {Router(state)}

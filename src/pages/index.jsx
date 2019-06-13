@@ -1,7 +1,13 @@
 import { h } from 'hyperapp'
 
 // Import actions
-import { SetValue } from '../actions'
+const SetValue = (state, {key, value}) => ({
+  ...state,
+  meta: {
+    ...state.meta,
+    [key]: value
+  }
+})
 
 const targetValue = event => event.target.value
 
