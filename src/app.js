@@ -1,5 +1,5 @@
 import { app } from 'hyperapp'
-import {LocationChanged} from './utils'
+import {LocationChanged, SetPath} from '../site-generator/utils'
 
 // Import CSS
 import 'sanitize.css'
@@ -8,7 +8,6 @@ import './global.css'
 // Import app
 import init from './init'
 import view from './view'
-import { SetPath } from './actions'
 
 // Initialize the app
 app({

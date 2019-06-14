@@ -1,15 +1,7 @@
 import { h } from 'hyperapp'
 
-import {ChangeLocation} from '../utils'
+import {Link} from '../../site-generator/utils'
 
-
-const Navigate = (state, to, ev) => {
-  console.log(to)
-  return [
-    state,
-    ChangeLocation({to})
-  ]
-}
 
 export default ({routes}) => (
   <aside class="side-bar">
@@ -21,7 +13,7 @@ export default ({routes}) => (
       <ul>
         {Object.keys(routes).map(route => (
           <li>
-            <button onmousedown={[Navigate, route, ev => ev.preventDefault()]}>{route}</button>
+            <Link to={route}>{route}</Link>
           </li>
         ))}
       </ul>

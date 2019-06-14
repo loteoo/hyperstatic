@@ -1,6 +1,6 @@
 import { h } from 'hyperapp'
 
-import Router from '../site-generator/Router'
+import {Router} from '../site-generator/utils'
 import Sidebar from './components/Sidebar'
 
 // root view

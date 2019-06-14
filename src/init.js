@@ -2,7 +2,7 @@
 
 import routes from './routes'
 
-import {SetPath} from './actions'
+import {SetPath} from '../site-generator/utils'
 
 const routesData = Object.keys(routes).reduce((pages, route) => ({
   ...pages,
