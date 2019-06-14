@@ -31,3 +31,35 @@ body {
 	background: var(--accent-color);
 	color: var(--background-color);
 }
+
+
+.main-content {
+  margin-left: 16rem;
+  padding: 3rem;
+}
+
+.side-bar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 16rem;
+  padding: 1rem;
+  background: var(--alt-background-color);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  h1 {
+    font-size: 1.5rem;
+  }
+  nav {
+    margin-bottom: auto;
+    >ul {
+      padding-left: 0;
+    }
+  }
+  * {
+    color: inherit;
+  }
+}
