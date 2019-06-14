@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "@hyperapp/time": "0.0.10",
+    "front-matter": "^3.0.2",
     "hyperapp": "^2.0.0-beta.22",
     "hyperapp-render": "^3.1.0",
+    "marked": "^0.6.2",
     "sanitize.css": "^8.0.1"
   },
   "devDependencies": {
