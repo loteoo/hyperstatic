@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer'
-import fs from 'fs'
+import fse from 'fs-extra'
 import path from 'path'
 
 import routes from '../src/routes'
@@ -44,16 +44,16 @@ async function crawler({ url, browser }) {
   const pagesHtml = await Promise.all(crawls)
 
   pagesHtml.forEach((html, i) => {
+
     const page = pages[i]
 
     const pageName = page == '/' ? 'index' : page
 
-    const pageFile = path.join(__dirname, '..', 'dist', `${pageName}.html`)
+    const pageFile = path.join(__dirname, '..', 'dist', pageName, 'index.html')
 
-    fs.writeFile(pageFile, html, (err) => {
-      if (err) throw err
-      console.log(`Page created: ${pageFile}`)
-    })
+    fse.outputFile(pageFile, html)
+      .then(() => console.log(`Page created: ${pageFile}`))
+      .catch(console.error)
   })
 
 

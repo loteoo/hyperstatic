@@ -2,6 +2,7 @@
 
 import routes from './routes'
 
+import {SetPath} from './actions'
 
 const routesData = Object.keys(routes).reduce((pages, route) => ({
   ...pages,
@@ -12,7 +13,7 @@ const routesData = Object.keys(routes).reduce((pages, route) => ({
 }), {})
 
 // Initial state of the app
-export default {
+const init = {
   meta: {
     title: 'Hyperapp 2.0',
     description: '1 kB JavaScript micro-framework for building declarative web applications'
@@ -24,3 +25,6 @@ export default {
   },
   routes: routesData
 }
+
+
+export default SetPath(init, window.location.pathname)

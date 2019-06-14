@@ -1,16 +1,9 @@
-// ==================
-// Global routes
-// ==================
 
+import {LoadRoute} from './utils'
 
 
 // Sets a value to the given key in the state
 export const SetPath = (state, path) => {
-
-  console.log('SetPath');
-  console.log(state);
-
-
 
   const next = {
     ...state,
@@ -21,14 +14,16 @@ export const SetPath = (state, path) => {
   }
 
 
-  console.log(state);
-
   const match = state.routes[path]
 
   if (match) {
     return [
       next,
-      LoadRoute(match)
+      LoadRoute({
+        action: ViewLoaded,
+        route: match.route,
+        viewPromise: match.viewPromise
+      })
     ]
   }
 
@@ -55,6 +50,3 @@ const ViewLoaded = (state, {route, view}) => ({
 
 
 
-const fx = (dispatch, { route, viewPromise }) => viewPromise.then(imported => dispatch([ViewLoaded, {route, view: imported.default}]))
-
-const LoadRoute = ({route, viewPromise}) => [fx, { route, viewPromise }]
