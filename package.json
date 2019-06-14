@@ -7,6 +7,7 @@
   "scripts": {
     "start": "parcel src/index.html --open",
     "build": "rimraf .cache && rimraf dist && parcel build ./src/index.html --no-source-maps --detailed-report && workbox generateSW workbox-config.js",
+    "render-site": "parcel build ./site-generator/render-site.js --target node --no-minify --no-source-maps --detailed-report --no-content-hash && node ./dist/render-site.js",
     "generate-pages": "parcel build ./site-generator/generate-site.js --target node --no-minify --no-source-maps --detailed-report --no-content-hash && node ./dist/generate-site.js",
     "generate-site": "npm run build && npm run generate-pages"
   },
@@ -16,6 +17,7 @@
     "hyperapp": "^2.0.0-beta.22",
     "hyperapp-render": "^3.1.0",
     "marked": "^0.6.2",
+    "puppeteer": "^1.17.0",
     "sanitize.css": "^8.0.1"
   },
   "devDependencies": {

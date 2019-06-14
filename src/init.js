@@ -1,5 +1,16 @@
 
 
+import routes from './routes'
+
+
+const routesData = Object.keys(routes).reduce((pages, route) => ({
+  ...pages,
+  [route]: {
+    route,
+    viewPromise: routes[route]
+  }
+}), {})
+
 // Initial state of the app
 export default {
   meta: {
@@ -11,5 +22,5 @@ export default {
     params: {},
     queryParams: {}
   },
-  routes: {}
+  routes: routesData
 }

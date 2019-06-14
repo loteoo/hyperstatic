@@ -12,5 +12,6 @@ export default state => (
   <main style={container}>
     <h2>About page</h2>
     <p>{state.meta.title}</p>
+    <p>ROLA CHIEN 2</p>
   </main>
 )
