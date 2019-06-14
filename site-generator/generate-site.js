@@ -1,42 +1,51 @@
-import routes from '../src/routes'
-
-import { renderToString } from 'hyperapp-render'
-
-import { getMatch } from './Router'
 
 import fs from 'fs'
+import path from 'path'
+import { renderToString } from 'hyperapp-render'
+
+import routes from '../src/routes'
+
+
 import init from '../src/init'
 
 
-const skeletton = fs.readFileSync('../dist/index.html')
+const skelettonPath = path.join(__dirname, '..', 'dist', 'index.html')
+const skeletton = fs.readFileSync(skelettonPath)
+
+const createPages = async () => {
+
+  const pages = await Promise.all(Object.keys(routes).map(route => routes[route]))
+
+  pages.forEach((page, i) => {
+
+    const route = routes[route]
 
 
-Object.keys(routes).forEach(route => {
-
-
-  // For each route, generate page
-
-  // Setup page state with proper route
-  const state = {
-    ...init,
-    location: {
-      ...init.location,
-      path: route
+    // Setup page state with proper route
+    const state = {
+      ...init,
+      location: {
+        ...init.location,
+        path: route
+      }
     }
-  }
 
-  // Get view
-  const pageView = getMatch(route)
+    const pageName = `${route.replace('/', '')}.html`
 
-  const pageName = `${route.replace('/', '')}.html`
+    const pageBody = renderToString(page.default, state)
 
-  const pageBody = renderToString(pageView, state)
+    const pageHtml = skeletton.replace('[INJECT_VIEW_HERE]', pageBody)
 
-  const pageHtml = skeletton.replace('[INJECT_VIEW_HERE]', pageBody)
+    fs.writeFile(`../dist/${pageName}`, pageHtml, (err) => {
+      if (err) throw err
+      console.log('Page created successfully.')
+    })
 
-  fs.writeFile(pageName, pageHtml, (err) => {
-    if (err) throw err
-    console.log('Page created successfully.')
   })
+}
 
+
+createPages().then(() => {
+  console.log("All pages created")
 })
+
