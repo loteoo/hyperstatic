@@ -1,5 +1,5 @@
 import { app } from 'hyperapp'
-import {LocationChanged, ParseRoute} from '../site-generator/utils'
+import {LocationChanged, ParseUrl} from '../site-generator/utils'
 
 // Import CSS
 import 'sanitize.css'
@@ -13,7 +13,7 @@ import view from './view'
 app({
   init,
   view,
-  subscriptions: state => [LocationChanged({action: ParseRoute})],
+  subscriptions: state => [LocationChanged({action: ParseUrl})],
   node: document.getElementById('app')
 })
 

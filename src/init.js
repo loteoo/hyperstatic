@@ -4,7 +4,7 @@ import UrlPattern from 'url-pattern'
 
 import routes from './routes'
 
-import {ParseRoute} from '../site-generator/utils'
+import {ParseUrl} from '../site-generator/utils'
 
 const routesData = Object.keys(routes).reduce((pages, route) => ({
   ...pages,
@@ -31,4 +31,7 @@ const init = {
 }
 
 
-export default ParseRoute(init, window.location.pathname)
+export default ParseUrl(init, {
+  path: window.location.pathname,
+  query: window.location.search
+})

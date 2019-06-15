@@ -1,7 +1,7 @@
 import { h } from 'hyperapp'
 
 
-import UrlPattern from 'url-pattern'
+import queryString from 'query-string'
 
 
 // Load route FX
@@ -24,7 +24,10 @@ export const ChangeLocation = ({to}) => [locationFx, { to }]
 const subFx = a => b => [a, b]
 export const LocationChanged =  subFx((dispatch, props) => {
   const handleLocationChange = ev => {
-    dispatch([props.action, window.location.pathname])
+    dispatch([props.action, {
+      path: window.location.pathname,
+      query: window.location.search
+    }])
   }
   addEventListener('pushstate', handleLocationChange)
   addEventListener('popstate', handleLocationChange)
@@ -46,6 +49,9 @@ const Navigate = (state, to, ev) => {
 }
 
 const TriggerRouteLoad = (state, path) => {
+
+  console.log('TriggerRouteLoad')
+  console.log(state)
 
 
   const routes = Object.keys(state.routes).map(route => state.routes[route])
@@ -71,6 +77,7 @@ const TriggerRouteLoad = (state, path) => {
       })
     ]
   }
+  return state
 }
 
 // Link component
@@ -108,7 +115,7 @@ export const Router = state => {
 
 
 // Sets a value to the given key in the state
-export const ParseRoute = (state, path) => {
+export const ParseUrl = (state, {path, query}) => {
 
   const routes = Object.keys(state.routes).map(route => state.routes[route])
   const matchedRoute = routes.find(route => route.pattern.match(path))
@@ -118,10 +125,10 @@ export const ParseRoute = (state, path) => {
   const next = {
     ...state,
     location: {
-      ...state.location,
       route: matchedRoute && matchedRoute.route,
       params: match || {},
-      path,
+      queryParams: queryString.parse(query),
+      path
     }
   }
 
