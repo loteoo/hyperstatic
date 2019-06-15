@@ -2,13 +2,6 @@ import { h } from 'hyperapp'
 import {Link} from '../../site-generator/utils'
 import { Http, preloadImage } from '../utils'
 
-const container = {
-  maxWidth: '1024px',
-  margin: '0 auto',
-  padding: '1rem'
-}
-
-
 
 const grid = {
   display: 'grid',
@@ -27,7 +20,7 @@ const card = {
 
 
 export default state => (
-  <main style={container}>
+  <main class="container">
     <h2>All pokemons:</h2>
     <div style={grid}>
       {state.rickAndMortyCharacters && state.rickAndMortyCharacters.map(character => (

@@ -3,12 +3,6 @@ import { h } from 'hyperapp'
 import {FetchPokedex} from '../actions'
 import { Link } from '../../site-generator/utils';
 
-const container = {
-  maxWidth: '1024px',
-  margin: '0 auto',
-  padding: '1rem'
-}
-
 
 const grid = {
   display: 'grid',
@@ -24,7 +18,7 @@ const card = {
 
 
 export default state => (
-  <main style={container}>
+  <main class="container">
     <h2>All pokemons:</h2>
     <div style={grid}>
       {state.pokemons && state.pokemons.map(pokemon => (
