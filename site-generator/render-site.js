@@ -3,6 +3,7 @@ import fse from 'fs-extra'
 import path from 'path'
 
 import routes from '../src/routes'
+import createPages from '../src/createPages'
 
 
 async function crawler({ url, browser }) {
@@ -32,11 +33,15 @@ async function crawler({ url, browser }) {
 (async function fetchAllPages() {
 
   const domain = "http://localhost:1234";
-  const pages = Object.keys(routes)
+  const staticRoutes = Object.keys(routes).filter(route => !route.includes('/:'))
   const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
 
+  const extraPages = await createPages()
 
-  const crawls = pages.map(page => crawler({
+  const allPages = staticRoutes.concat(extraPages)
+
+
+  const crawls = allPages.map(page => crawler({
     url: `${domain}${page}`,
     browser
   }))
@@ -45,14 +50,14 @@ async function crawler({ url, browser }) {
 
   pagesHtml.forEach((html, i) => {
 
-    const page = pages[i]
+    const pagePath = allPages[i]
 
-    const pageName = page == '/' ? 'index' : page
+    const pageName = pagePath == '/' ? '/index.html' : `${pagePath}/index.html`
 
-    const pageFile = path.join(__dirname, '..', 'dist', pageName, 'index.html')
+    const outputPath = path.join(__dirname, '..', 'dist', pageName)
 
-    fse.outputFile(pageFile, html)
-      .then(() => console.log(`Page created: ${pageFile}`))
+    fse.outputFile(outputPath, html)
+      .then(() => console.log(`Page created: ${outputPath}`))
       .catch(console.error)
   })
 

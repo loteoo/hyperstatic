@@ -20,14 +20,13 @@ export default ({state}) => (
               ? 'Loading'
               : 'Loaded!'
 
-
           return (
             <li>
               <Link to={route}>{routeState} - {route}</Link>
             </li>
           )
         })}
-        <Link to="/item/83">/item/83</Link>
+        <Link to="/pokemons/83">pokemons/83</Link>
       </ul>
     </nav>
     <footer>

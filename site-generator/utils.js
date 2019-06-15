@@ -5,7 +5,17 @@ import queryString from 'query-string'
 
 
 // Load route FX
-const loadRouteFx = (dispatch, { action, route, viewPromise }) => viewPromise.then(imported => dispatch([action, {route, view: imported.default}]))
+const loadRouteFx = (dispatch, { action, route, viewPromise }) =>
+  viewPromise.then(importedModule => {
+    console.log(importedModule);
+
+    dispatch([action, {
+      route,
+      view: importedModule.default,
+      onLoad: importedModule.onLoad
+    }])
+  })
+
 export const LoadRoute = ({action, route, viewPromise}) => [loadRouteFx, { action, route, viewPromise }]
 
 
@@ -50,13 +60,8 @@ const Navigate = (state, to, ev) => {
 
 const TriggerRouteLoad = (state, path) => {
 
-  console.log('TriggerRouteLoad')
-  console.log(state)
-
-
   const routes = Object.keys(state.routes).map(route => state.routes[route])
   const matchedRoute = routes.find(route => route.pattern.match(path))
-
 
   if (matchedRoute) {
     return [
@@ -138,17 +143,22 @@ export const ParseUrl = (state, {path, query}) => {
 }
 
 
-const ViewLoaded = (state, {route, view}) => ({
-  ...state,
-  routes: {
-    ...state.routes,
-    [route]: {
-      ...state.routes[route],
-      view,
-      loading: false
+const ViewLoaded = (state, {route, view, onLoad}) => {
+
+  const next = {
+    ...state,
+    routes: {
+      ...state.routes,
+      [route]: {
+        ...state.routes[route],
+        view,
+        loading: false
+      }
     }
   }
-})
+
+  return onLoad ? onLoad(next) : next
+}
 
 
 
