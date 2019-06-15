@@ -1,14 +1,17 @@
 
 
+import UrlPattern from 'url-pattern'
+
 import routes from './routes'
 
-import {SetPath} from '../site-generator/utils'
+import {ParseRoute} from '../site-generator/utils'
 
 const routesData = Object.keys(routes).reduce((pages, route) => ({
   ...pages,
   [route]: {
     route,
-    viewPromise: routes[route]
+    viewPromise: routes[route],
+    pattern: new UrlPattern(route)
   }
 }), {})
 
@@ -21,10 +24,11 @@ const init = {
   location: {
     path: '/',
     params: {},
-    queryParams: {}
+    queryParams: {},
+    route: null
   },
   routes: routesData
 }
 
 
-export default SetPath(init, window.location.pathname)
+export default ParseRoute(init, window.location.pathname)

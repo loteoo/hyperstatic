@@ -1,5 +1,6 @@
 export default {
   '/': import('./pages/index'),
   '/about': import('./pages/about'),
-  '/item': import('./pages/contact') // TODO: parse routes
+  '/contact': import('./pages/contact'),
+  '/item/:id': import('./pages/item')
 }

@@ -10,6 +10,7 @@ const container = {
 
 export default state => (
   <main style={container}>
-    <h2>Contact page</h2>
+    <h2>Item page</h2>
+    <p>Item id: <b>{state.location.params.id}</b></p>
   </main>
 )

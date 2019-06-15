@@ -20,7 +20,8 @@
     "marked": "^0.6.2",
     "postcss-modules": "^1.4.1",
     "puppeteer": "^1.17.0",
-    "sanitize.css": "^8.0.1"
+    "sanitize.css": "^8.0.1",
+    "url-pattern": "^1.0.3"
   },
   "devDependencies": {
     "autoprefixer": "^9.6.0",

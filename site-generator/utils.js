@@ -1,5 +1,9 @@
 import { h } from 'hyperapp'
 
+
+import UrlPattern from 'url-pattern'
+
+
 // Load route FX
 const loadRouteFx = (dispatch, { action, route, viewPromise }) => viewPromise.then(imported => dispatch([action, {route, view: imported.default}]))
 export const LoadRoute = ({action, route, viewPromise}) => [loadRouteFx, { action, route, viewPromise }]
@@ -41,10 +45,39 @@ const Navigate = (state, to, ev) => {
   ]
 }
 
+const TriggerRouteLoad = (state, path) => {
+
+
+  const routes = Object.keys(state.routes).map(route => state.routes[route])
+  const matchedRoute = routes.find(route => route.pattern.match(path))
+
+
+  if (matchedRoute) {
+    return [
+      {
+        ...state,
+        routes: {
+          ...state.routes,
+          [matchedRoute.route]: {
+            ...matchedRoute,
+            loading: true
+          }
+        }
+      },
+      LoadRoute({
+        action: ViewLoaded,
+        route: matchedRoute.route,
+        viewPromise: matchedRoute.viewPromise
+      })
+    ]
+  }
+}
+
 // Link component
 export const Link = ({to, ...props}, children) => (
   <a
     href={to}
+    onmouseover={[TriggerRouteLoad, to]}
     onclick={[Navigate, ev => {
       ev.preventDefault()
       return to
@@ -58,7 +91,7 @@ export const Link = ({to, ...props}, children) => (
 // Router component
 export const Router = state => {
 
-  const match = state.routes[state.location.path]
+  const match = state.routes[state.location.route]
 
   if (match) {
     if (match.view) {
@@ -67,37 +100,34 @@ export const Router = state => {
       return 'loading...'
     }
   }
+
+  return '404'
 }
 
 
 
 
 // Sets a value to the given key in the state
-export const SetPath = (state, path) => {
+export const ParseRoute = (state, path) => {
 
+  const routes = Object.keys(state.routes).map(route => state.routes[route])
+  const matchedRoute = routes.find(route => route.pattern.match(path))
+  const match = matchedRoute && matchedRoute.pattern.match(path)
+
+  // Set
   const next = {
     ...state,
     location: {
       ...state.location,
-      path
+      route: matchedRoute && matchedRoute.route,
+      params: match || {},
+      path,
     }
   }
 
 
-  const match = state.routes[path]
 
-  if (match) {
-    return [
-      next,
-      LoadRoute({
-        action: ViewLoaded,
-        route: match.route,
-        viewPromise: match.viewPromise
-      })
-    ]
-  }
-
-  return next
+  return matchedRoute ? TriggerRouteLoad(next, path) : next
 }
 
 
@@ -107,8 +137,11 @@ const ViewLoaded = (state, {route, view}) => ({
     ...state.routes,
     [route]: {
       ...state.routes[route],
-      view
+      view,
+      loading: false
     }
   }
 })
+
+
 

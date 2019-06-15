@@ -8,7 +8,7 @@ export default state => {
   console.log(state)
   return (
     <div id="top" class="page" role="document">
-      <Sidebar routes={state.routes} />
+      <Sidebar state={state} />
 
       <main role="main" class="main-content">
         <h2>Page:</h2>
