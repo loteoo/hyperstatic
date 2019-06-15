@@ -1,9 +1,9 @@
 export default {
-  '/': import('./pages/index'),
-  '/about': import('./pages/about'),
-  '/architecture': import('./pages/architecture'),
-  '/hurdles': import('./pages/hurdles'),
-  '/rickandmorty': import('./pages/rickandmorty'),
-  '/pokemons': import('./pages/pokemons'),
-  '/pokemons/:id': import('./pages/pokemon')
+  '/': import('./pages/Home'),
+  '/about': import('./pages/About'),
+  '/architecture': import('./pages/Architecture'),
+  '/hurdles': import('./pages/Hurdles'),
+  '/rickandmorty': import('./pages/RickAndMorty'),
+  '/pokemons': import('./pages/Pokemons'),
+  '/pokemons/:id': import('./pages/Pokemon')
 }

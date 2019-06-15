@@ -18,8 +18,8 @@ const routesData = Object.keys(routes).reduce((pages, route) => ({
 // Initial state of the app
 const init = {
   meta: {
-    title: 'Hyperapp 2.0',
-    description: '1 kB JavaScript micro-framework for building declarative web applications'
+    title: 'Page title',
+    description: 'Page description'
   },
   location: {
     path: '/',

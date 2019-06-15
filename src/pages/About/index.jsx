@@ -1,5 +1,6 @@
 import { h } from 'hyperapp'
 
+import markdown from './about.md'
 
 const container = {
   maxWidth: '1024px',
@@ -18,5 +19,6 @@ export default state => (
       <li>asdasd</li>
       <li>asdasd</li>
     </ul>
+    <div innerHTML={markdown}></div>
   </main>
 )
