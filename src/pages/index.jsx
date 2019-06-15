@@ -33,7 +33,5 @@ export default state => (
       value={state.meta.description}
       oninput={[SetValue, ev => ({ key: 'description', value: targetValue(ev) })]}
     />
-    <h4>State: </h4>
-    <pre>{JSON.stringify(state, null, 2)}</pre>
   </main>
 )

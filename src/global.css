@@ -9,8 +9,9 @@
 	--text-color: #111;
   --accent-color: #4641FF;
   --border-color: #eee;
-  --success-color: #06d19c;
+  --warning-color: yellow;
   --danger-color: tomato;
+  --success-color: #06d19c;
 }
 
 /* === Default cascade === */
@@ -65,3 +66,42 @@ body {
 }
 
 
+.side-bar-link {
+  display: block;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  margin: 1rem 0;
+  color: white;
+  background-color: grey;
+  border-radius: 0.5rem;
+  position: relative;
+  svg {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-position: center;
+    background-image: url(assets/icons/x.svg);
+    width: 3rem;
+  }
+  &.invalid {
+    background-color: var(--danger-color);
+    svg {
+      background-image: url(assets/icons/alert-circle.svg);
+    }
+  }
+  &.loading {
+    background-color: var(--warning-color);
+    svg {
+      background-image: url(assets/icons/loader.svg);
+    }
+  }
+  &.ready {
+    background-color: var(--success-color);
+    svg {
+      background-image: url(assets/icons/check-circle.svg);
+    }
+  }
+
+}

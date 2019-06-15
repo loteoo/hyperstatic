@@ -10,6 +10,6 @@ const container = {
 
 export default state => (
   <main style={container}>
-    <h2>Contact page</h2>
+    <h1>Planned features</h1>
   </main>
 )

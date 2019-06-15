@@ -90,7 +90,6 @@ export const Link = ({to, state, ...props}, children) => {
   const matchedRoute = routes.find(route => route.pattern.match(to))
   const loaded = matchedRoute && matchedRoute.view
 
-
   const attributes = {
     href: to,
     onmousedown: [Navigate, to],
