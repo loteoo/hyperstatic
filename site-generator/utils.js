@@ -122,9 +122,11 @@ export const Router = state => {
 // Sets a value to the given key in the state
 export const ParseUrl = (state, {path, query}) => {
 
+  const withoutTrailingSlash = path.replace(/\/$/, '')
+
   const routes = Object.keys(state.routes).map(route => state.routes[route])
-  const matchedRoute = routes.find(route => route.pattern.match(path))
-  const match = matchedRoute && matchedRoute.pattern.match(path)
+  const matchedRoute = routes.find(route => route.pattern.match(withoutTrailingSlash))
+  const match = matchedRoute && matchedRoute.pattern.match(withoutTrailingSlash)
 
   // Set
   const next = {
@@ -133,7 +135,7 @@ export const ParseUrl = (state, {path, query}) => {
       route: matchedRoute && matchedRoute.route,
       params: match || {},
       queryParams: queryString.parse(query),
-      path
+      path: withoutTrailingSlash
     }
   }
 
