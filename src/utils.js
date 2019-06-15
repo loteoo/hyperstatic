@@ -1,5 +1,9 @@
 
 
+export const preloadImage = (url) => {
+  const img = new Image()
+  img.src = url
+}
 
 const fetchFx = (dispatch, props) =>
   fetch(props.url)

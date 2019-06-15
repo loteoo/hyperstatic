@@ -1,6 +1,6 @@
 import { h } from 'hyperapp'
 import {Link} from '../../site-generator/utils'
-import { Http } from '../utils'
+import { Http, preloadImage } from '../utils'
 
 const container = {
   maxWidth: '1024px',
@@ -42,11 +42,14 @@ export default state => (
 
 
 
+export const HandleRickAndMortyCharacters = (state, response) => {
+  response.results.forEach(char => preloadImage(char.image))
+  return {
+    ...state,
+    rickAndMortyCharacters: response.results
+  }
+}
 
-export const HandleRickAndMortyCharacters = (state, response) => ({
-  ...state,
-  rickAndMortyCharacters: response.results
-})
 export const FetchRickAndMortyCharacters = (state) => {
   return state.rickAndMortyCharacters
     ? state
