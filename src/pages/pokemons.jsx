@@ -28,7 +28,7 @@ export default state => (
     <h2>All pokemons:</h2>
     <div style={grid}>
       {state.pokemons && state.pokemons.map(pokemon => (
-        <Link to={`/pokemons/${pokemon.id}`} style={card}>
+        <Link state={state} to={`/pokemons/${pokemon.id}`} style={card}>
           <img src={pokemon.img} alt={pokemon.name} />
           <span>{pokemon.name}</span>
         </Link>

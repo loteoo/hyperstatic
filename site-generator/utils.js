@@ -7,8 +7,6 @@ import queryString from 'query-string'
 // Load route FX
 const loadRouteFx = (dispatch, { action, route, viewPromise }) =>
   viewPromise.then(importedModule => {
-    console.log(importedModule);
-
     dispatch([action, {
       route,
       view: importedModule.default,
@@ -86,19 +84,28 @@ const TriggerRouteLoad = (state, path) => {
 }
 
 // Link component
-export const Link = ({to, ...props}, children) => (
-  <a
-    href={to}
-    onmouseover={[TriggerRouteLoad, to]}
-    onclick={[Navigate, ev => {
-      ev.preventDefault()
-      return to
-    }]}
-    {...props}
-  >
-    {children}
-  </a>
-)
+export const Link = ({to, state, ...props}, children) => {
+
+  const routes = Object.keys(state.routes).map(route => state.routes[route])
+  const matchedRoute = routes.find(route => route.pattern.match(to))
+  const loaded = matchedRoute && matchedRoute.view
+
+
+  const attributes = {
+    href: to,
+    onmousedown: [Navigate, to],
+    onclick: [
+      state => state,
+      ev => {
+        ev.preventDefault()
+      }
+    ],
+    ...(!loaded && {onmouseover: [TriggerRouteLoad, to]}),
+    ...props
+  }
+
+  return h('a', attributes, children)
+}
 
 // Router component
 export const Router = state => {

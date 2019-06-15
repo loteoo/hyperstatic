@@ -22,11 +22,11 @@ export default ({state}) => (
 
           return (
             <li>
-              <Link to={route}>{routeState} - {route}</Link>
+              <Link state={state} to={route}>{routeState} - {route}</Link>
             </li>
           )
         })}
-        <Link to="/pokemons/83">pokemons/83</Link>
+        <Link state={state} to="/pokemons/83">pokemons/83</Link>
       </ul>
     </nav>
     <footer>
