@@ -46,6 +46,8 @@ async function crawler({ url, browser }) {
     browser
   }))
 
+  console.log(`Rendering ${crawls.length} pages...`)
+
   const pagesHtml = await Promise.all(crawls)
 
   pagesHtml.forEach((html, i) => {

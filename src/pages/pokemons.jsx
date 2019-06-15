@@ -1,6 +1,6 @@
 import { h } from 'hyperapp'
 
-import {Http} from '../utils'
+import {FetchPokedex} from '../actions'
 import { Link } from '../../site-generator/utils';
 
 const container = {
@@ -38,23 +38,4 @@ export default state => (
 )
 
 
-const preloadImage = (url) => {
-  const img = new Image()
-  img.src = url
-}
-
-const HandlePokedex = (state, response) => {
-  response.pokemon.forEach(p => preloadImage(p.img))
-  return {
-    ...state,
-    pokemons: response.pokemon
-  }
-}
-
-export const onLoad = (state) => [
-  state,
-  Http.get({
-    url: 'https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json',
-    action: HandlePokedex
-  })
-]
+export const onLoad = FetchPokedex

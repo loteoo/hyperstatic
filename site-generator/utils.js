@@ -122,7 +122,8 @@ export const Router = state => {
 // Sets a value to the given key in the state
 export const ParseUrl = (state, {path, query}) => {
 
-  const withoutTrailingSlash = path.replace(/\/$/, '')
+  // Ignore trailing slashes EXPEPT for home page
+  const withoutTrailingSlash = path !== '/' ? path.replace(/\/$/, '') : path
 
   const routes = Object.keys(state.routes).map(route => state.routes[route])
   const matchedRoute = routes.find(route => route.pattern.match(withoutTrailingSlash))

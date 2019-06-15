@@ -1,6 +1,8 @@
 import { h } from 'hyperapp'
 
 
+import {FetchPokedex} from '../actions'
+
 const container = {
   maxWidth: '1024px',
   margin: '0 auto',
@@ -21,3 +23,6 @@ export default state => {
     )
   }
 }
+
+
+export const onLoad = FetchPokedex
