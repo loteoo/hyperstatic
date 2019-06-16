@@ -20,7 +20,7 @@ const card = {
 
 
 export default state => (
-  <main class="container">
+  <main>
     <h2>All pokemons:</h2>
     <div style={grid}>
       {state.rickAndMortyCharacters && state.rickAndMortyCharacters.map(character => (
@@ -56,4 +56,4 @@ export const FetchRickAndMortyCharacters = (state) => {
 }
 
 
-export const onLoad = FetchRickAndMortyCharacters
+export const Init = FetchRickAndMortyCharacters

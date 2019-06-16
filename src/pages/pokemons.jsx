@@ -4,6 +4,9 @@ import {FetchPokedex} from '../actions'
 import { Link } from '../../site-generator/utils';
 
 
+export const Init = FetchPokedex
+
+
 const grid = {
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
@@ -18,7 +21,7 @@ const card = {
 
 
 export default state => (
-  <main class="container">
+  <main>
     <h2>All pokemons:</h2>
     <div style={grid}>
       {state.pokemons && state.pokemons.map(pokemon => (
@@ -31,5 +34,3 @@ export default state => (
   </main>
 )
 
-
-export const onLoad = FetchPokedex

@@ -10,7 +10,7 @@ const loadRouteFx = (dispatch, { action, route, viewPromise }) =>
     dispatch([action, {
       route,
       view: importedModule.default,
-      onLoad: importedModule.onLoad
+      Init: importedModule.Init
     }])
   })
 
@@ -152,9 +152,9 @@ export const ParseUrl = (state, {path, query}) => {
 }
 
 
-const ViewLoaded = (state, {route, view, onLoad}) => {
+const ViewLoaded = (state, {route, view, Init}) => {
 
-  const next = {
+  const loaded = {
     ...state,
     routes: {
       ...state.routes,
@@ -166,7 +166,8 @@ const ViewLoaded = (state, {route, view, onLoad}) => {
     }
   }
 
-  return onLoad ? onLoad(next) : next
+  return Init ? Init(loaded) : loaded
+
 }
 
 

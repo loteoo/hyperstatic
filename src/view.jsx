@@ -9,12 +9,9 @@ export default state => {
   return (
     <div id="app" class="page" role="document">
       <Sidebar state={state} />
-
       <main role="main" class="main-content">
-        <h2>Page:</h2>
         {Router(state)}
       </main>
-
     </div>
   )
 }
