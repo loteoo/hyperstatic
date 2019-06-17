@@ -7,7 +7,7 @@ import Sidebar from './components/Sidebar'
 export default state => {
   console.log(state)
   return (
-    <div id="app" class="page" role="document">
+    <div id="app" class="layout" role="document">
       <Sidebar state={state} />
       <main role="main" class="main-content">
         {Router(state)}

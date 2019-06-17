@@ -21,8 +21,8 @@ const Decrement = (state) => ({
 
 
 
-export default state => (
-  <div>
+export default (state) => (
+  <div key="counter">
     <div innerHTML={markdown}></div>
     <div class="counter">
       <h2>Counter</h2>
