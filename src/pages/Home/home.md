@@ -19,7 +19,7 @@ Pages are hyperapp components (pure view functions) that receive the state.
 
 If they need dynamic runtime data, they get it from the state as usual.
 
-Pages can export a `onLoad` hyperapp Action which gets triggered when the page's bundle has been downloaded. Not to confuse with an `onCreate` action which would be triggered when a page apprears on screen.
+Pages can export a `Init` hyperapp Action which gets triggered when the page's bundle has been downloaded. Not to confuse with an `OnNavigation` action which would be triggered when a page apprears on screen.
 
 This `onLoad` Action can be used to load data for the page and setup the state in advance for the page.
 
@@ -50,7 +50,7 @@ The routes are actually loaded into the state, which allows the application to b
 
 # Link
 
-The `<Link></Link>` component works just like your traditionnal Hyperapp / React <Link> components. Use use them like this:
+The `<Link></Link>` component works just like your traditionnal Hyperapp / React / Gatsby `<Link>` components. Use use them like this:
 
 `<Link to="/my-awesome-page>My awesome page!</Link>`  
 or  
@@ -63,7 +63,7 @@ Here is what is going on in the background.
 Each link is aware of the page bundle it points to. Links have 4 statuses: 
 
 - Invalid route
-  This is if the link has no mathing pattern in the state. The link knows it will 404. The link will still work, but will not be loading anything in the background.
+  This is if the link has no mathing route. The link knows it will 404. The link will still work, but will not be doing anything in the background.
 - Iddle
   The link is valid and waits to enter the viewport or to be hovered on.
 - Loading
