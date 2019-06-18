@@ -1,13 +1,16 @@
 import { app } from 'hyperapp'
-import {LocationChanged, ParseUrl} from '../site-generator/utils'
+import {LocationChanged} from '../site-generator/subscriptions'
+import {ParseUrl} from '../site-generator/actions'
 
 // Import CSS
 import 'sanitize.css'
 import './global.css'
 
 // Import app
-import init from './init'
+import init from '../site-generator/init'
 import view from './view'
+
+
 
 // Initialize the app
 app({

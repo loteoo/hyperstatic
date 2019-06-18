@@ -1,5 +1,5 @@
 
-import {Router} from '../site-generator/utils'
+import {Router} from '../site-generator/Router'
 import Sidebar from './components/Sidebar'
 
 // root view

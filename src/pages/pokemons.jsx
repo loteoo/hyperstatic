@@ -1,6 +1,6 @@
 
 import {FetchPokedex} from '../actions'
-import { Link } from '../../site-generator/utils';
+import { Link } from '../../site-generator/Link';
 
 
 export const Init = FetchPokedex

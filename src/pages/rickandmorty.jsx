@@ -1,5 +1,5 @@
 
-import {Link} from '../../site-generator/utils'
+import {Link} from '../../site-generator/Link'
 import { Http, preloadImage } from '../utils'
 
 

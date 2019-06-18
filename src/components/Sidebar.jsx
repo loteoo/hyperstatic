@@ -1,5 +1,5 @@
 
-import {Link} from '../../site-generator/utils'
+import {Link} from '../../site-generator/Link'
 
 import {Invalid, Iddle, Loading, Ready} from './icons'
 
