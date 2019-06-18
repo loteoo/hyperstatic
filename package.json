@@ -10,7 +10,6 @@
     "render-pages": "parcel build ./site-generator/render-pages.js --target node --no-minify --no-source-maps --detailed-report --no-content-hash && node ./dist/render-pages.js"
   },
   "dependencies": {
-    "@hyperapp/time": "0.0.10",
     "front-matter": "^3.0.2",
     "fs-extra": "^8.0.1",
     "hyperapp": "^2.0.0-beta.22",
