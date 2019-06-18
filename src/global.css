@@ -70,7 +70,7 @@ h1, h2, h3, h4, h5, h6 {
     position: sticky;
     top: 0;
     max-width: 20rem;
-    margin: 3rem 0;
+    margin: 6rem 0;
     h1 {
       font-size: 1.5rem;
       margin: 0;
@@ -92,7 +92,7 @@ h1, h2, h3, h4, h5, h6 {
 .menu-link {
   display: flex;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   position: relative;
   text-decoration: none;
   &:not(:last-child) {
@@ -125,6 +125,10 @@ h1, h2, h3, h4, h5, h6 {
   }
   &.active {
     color: var(--accent-color);
+    svg {
+      color: var(--success-color);
+      stroke: currentColor;
+    }
   }
   b {
     margin-left: 0.5rem;
@@ -138,13 +142,16 @@ h1, h2, h3, h4, h5, h6 {
 
 .main-content {
   max-width: 768px;
-  margin: 3rem 3rem 3rem calc(30% + 3rem);
+  margin: 0 3rem 0 calc(30% + 3rem);
+  padding: 6rem 0;
+}
+
+.box {
   padding: 3rem;
   background-color: var(--elevated-background-color);
   border-radius: 8px;
   box-shadow: rgba(8, 35, 51, 0.05) 0px 3px 6px;
 }
-
 
 
 pre code {

@@ -1,19 +1,19 @@
 # This site is fast
 
-## Very very fast
+#### Very fast
 
-It's built using an experimental static site generator / layer on top of hyperapp.
+It's built using an experimental code splitting and navigation layer on top of hyperapp.
 
 It is meant to be deployed on static hosting services like Netlify or Github Pages, which are often free, efficient, highly scalable and a lot more.
 
-Pages are bundled separately and loaded asynchronously at the right time using a very smart `<Link>` component, but all share the same global state and Hyperapp instance.
+Pages are bundled individually and loaded asynchronously at the right time using a very smart `<Link>` component. They all still share the same global state and Hyperapp instance.
 
 
 
 Here are the pieces:
 
 
-# Pages 
+## Pages 
 Pages are hyperapp components (pure view functions) that receive the state.
 
 They are bundled in their own file using parcel's [dynamic imports](https://parceljs.org/code_splitting.html). 
@@ -29,7 +29,7 @@ This `Init` Action can be used to setup the state in advance for the page or loa
 
 
 
-# Routing
+## Routing
 
 To route your app, you list all your route patterns in a `routes.js` file, and map these routes to your page components.
 
@@ -52,9 +52,9 @@ You need to use the `import(...)` statement for each route to indicate parcel to
 The routes are actually loaded into the state, which allows the application to be aware of the status of each route. This is also necessary for many of the `Link` component's functionnalities.
 
 
-# Link
+## Link
 
-The `<Link></Link>` component works just like your traditionnal Hyperapp / React / Gatsby `<Link>` components. Use use them like this:
+The `<Link>` component works just like your typical Hyperapp / React / Gatsby `<Link>` component. Use use them like this:
 
 `<Link to="/my-awesome-page>My awesome page!</Link>`  
 or  
@@ -67,27 +67,29 @@ Here is what is going on in the background.
 Each link is aware of the page bundle it points to. Links have 4 statuses: 
 
 - **Invalid route**:
-  The link has no mathing route. The link knows it will 404. The link will still work, but will not be doing anything in the background.
+  The link has no matching route. The link knows it will 404. The link will still work, but will not be doing anything in the background.
 - **Iddle**:
   The link is valid and waits to enter the viewport or to be hovered on.
 - **Loading**:
-  The page bundle matching the link is being downloaded. This was triggered because the link has entered the viewport, been hovered on or has been clicked.
+  The page bundle matching the link is being downloaded. This was triggered because this link, or another link pointing to the same bundle has entered the viewport, been hovered on or has been clicked.
 - **Loaded**:
-  The mathing route is ready to be viewed
+  The matching route is ready to be viewed
 - **Active**:
-  The route has been activated, the mathing page is being viewed.
+  The route has been activated, the matching page is being viewed.
 
 For this technical demo, the statuses for each link is being shown with an icon, but usually, this would all be transparent to the user.
 
 
-# State structure
 
+## Pre-rendering 
 
-# Rendering
+Pre-rendering the site is actually optionnal. The entire site will still work perfectly without it, but doing it still has some nice benefits. 
 
-Pre-rendering the site is actually optionnal. The entire site will still work perfectly without it. But doing it still has some nice benefits. Even if Hyperapp's tiny size and quick rendering brings your TTI to a negligable number for most of your users, there will always be users who might come your site on a very slow network connection and low-end devices who will benefit from this. 
+Even if Hyperapp's tiny size and quick rendering brings your TTI to a negligable number, there will always be users with a very slow network connection and low-end device who will benefit from this. 
 
-To render your static routes, simply execute this command:
+There also SEO benefits to this.
+
+To render your static routes, run this command:
 
 ```
 npm run render-pages
@@ -96,3 +98,5 @@ npm run render-pages
 If you have dynamic routes that you want to render, you need to give an array of all these URLs to the generator.
 
 You can do this dynamically by adding javascript to the `createPages.js` file.
+
+All pages for this demo site has been pre-rendered. Try disabling javascript in your browser, everything should still mostly work!

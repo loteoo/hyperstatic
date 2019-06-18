@@ -30,7 +30,7 @@ const LinkWithStatus = ({state, to, bundleSize, ...props}, children) => {
           : 'ready'
 
   return (
-    <Link class={'menu-link ' + status} state={state} to={to} {...props}>
+    <Link scrollToTop class={'menu-link ' + status} state={state} to={to} {...props}>
       {children}
       {statusToSvg[status]()}
     </Link>
@@ -48,7 +48,7 @@ export default ({state}) => (
       <nav role="navigation">
         <LinkWithStatus state={state} bundleSize="6kb" to="/">Home</LinkWithStatus>
         <LinkWithStatus state={state} bundleSize="6kb" to="/project">The project</LinkWithStatus>
-        <LinkWithStatus state={state} bundleSize="6kb" to="/architecture">Architecture</LinkWithStatus>
+        <LinkWithStatus state={state} bundleSize="6kb" to="/starter">Starter template</LinkWithStatus>
         <LinkWithStatus state={state} bundleSize="6kb" to="/counter">Counter</LinkWithStatus>
         <LinkWithStatus state={state} bundleSize="6kb" to="/hurdles">Tech hurdles</LinkWithStatus>
         <LinkWithStatus state={state} bundleSize="6kb" to="/pokemons">Pokemons</LinkWithStatus>

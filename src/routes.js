@@ -1,7 +1,7 @@
 export default {
   '/': import('./pages/Home'),
   '/project': import('./pages/Project'),
-  '/architecture': import('./pages/Architecture'),
+  '/starter': import('./pages/Starter'),
   '/counter': import('./pages/Counter'),
   '/hurdles': import('./pages/Hurdles'),
   '/rickandmorty': import('./pages/RickAndMorty'),

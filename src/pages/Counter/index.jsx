@@ -1,4 +1,4 @@
-import markdown from './counter.md'
+import intro from './counter.md'
 
 export const Init = (state) => ({
   ...state,
@@ -17,7 +17,7 @@ const Decrement = (state) => ({
 
 export default (state) => (
   <div key="counter">
-    <div innerHTML={markdown}></div>
+    <div innerHTML={intro}></div>
     <div class="counter">
       <h2>Counter</h2>
       <h1>{state.counter}</h1>
