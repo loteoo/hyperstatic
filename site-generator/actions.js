@@ -47,11 +47,11 @@ const ViewLoaded = (state, {route, view, Init}) => {
 
 
 // Navigate action
-export const Navigate = (state, to, ev) => {
-  return [
-    state,
-    ChangeLocation({to})
-  ]
+export const Navigate = (state, to) => {
+
+  return to
+    ? [state, ChangeLocation({to})]
+    : state
 }
 
 export const TriggerRouteLoad = (state, path) => {

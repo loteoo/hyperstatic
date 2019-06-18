@@ -11,7 +11,12 @@ export const Link = ({to, state, ...props}, children) => {
 
   const attributes = {
     href: to,
-    onmousedown: [Navigate, to],
+    onmousedown: [Navigate, ev => {
+      if (ev.button === 0) {
+        return to
+      }
+      return
+    }],
     onclick: [
       state => state,
       ev => {

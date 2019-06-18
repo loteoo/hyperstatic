@@ -3,17 +3,21 @@ import {Link} from '../../site-generator/Link'
 
 import {Invalid, Iddle, Loading, Ready} from './icons'
 
-const statusToSvg = {
-  'invalid': Invalid,
-  'iddle': Iddle,
-  'loading': Loading,
-  'ready': Ready
-}
 
-const LinkWithStatus = ({state, to, ...props}, children) => {
+const LinkWithStatus = ({state, to, bundleSize, ...props}, children) => {
+
+
+  const statusToSvg = {
+    'invalid': Invalid,
+    'iddle': () => <b>{bundleSize}</b>,
+    'loading': Loading,
+    'ready': Ready,
+    'active': Ready
+  }
 
   const routes = Object.keys(state.routes).map(route => state.routes[route])
   const matchedRoute = routes.find(route => route.pattern.match(to))
+  const active = to === state.location.path
 
   const status = !matchedRoute
     ? 'invalid'
@@ -21,12 +25,14 @@ const LinkWithStatus = ({state, to, ...props}, children) => {
       ? 'iddle'
       : matchedRoute.loading
         ? 'loading'
-        : 'ready'
+        : active
+          ? 'active'
+          : 'ready'
 
   return (
     <Link class={'menu-link ' + status} state={state} to={to} {...props}>
-      {statusToSvg[status]()}
       {children}
+      {statusToSvg[status]()}
     </Link>
   )
 }
@@ -37,19 +43,17 @@ export default ({state}) => (
     <div class="menu">
       <header role="banner">
         <h1>Hyperapp site generator</h1>
-        <p>Hyperapp based static site generator + routing / code splitting layer</p>
+        <p>Static site boilerplate / framework with a fancy code splitting and navigation layer</p>
       </header>
       <nav role="navigation">
-        <ul>
-          <li><LinkWithStatus state={state} to="/">Home <b>6kb</b></LinkWithStatus></li>
-          <li><LinkWithStatus state={state} to="/project">The project <b>6kb</b></LinkWithStatus></li>
-          <li><LinkWithStatus state={state} to="/architecture">Architecture <b>6kb</b></LinkWithStatus></li>
-          <li><LinkWithStatus state={state} to="/counter">Counter <b>6kb</b></LinkWithStatus></li>
-          <li><LinkWithStatus state={state} to="/hurdles">Tech hurdles <b>6kb</b></LinkWithStatus></li>
-          <li><LinkWithStatus state={state} to="/pokemons">Pokemons <b>6kb</b></LinkWithStatus></li>
-          <li><LinkWithStatus state={state} to="/rickandmorty">Rick and morty characters <b>6kb</b></LinkWithStatus></li>
-          <li><LinkWithStatus state={state} to="/invalid">Invalid <b>6kb</b></LinkWithStatus></li>
-        </ul>
+        <LinkWithStatus state={state} bundleSize="6kb" to="/">Home</LinkWithStatus>
+        <LinkWithStatus state={state} bundleSize="6kb" to="/project">The project</LinkWithStatus>
+        <LinkWithStatus state={state} bundleSize="6kb" to="/architecture">Architecture</LinkWithStatus>
+        <LinkWithStatus state={state} bundleSize="6kb" to="/counter">Counter</LinkWithStatus>
+        <LinkWithStatus state={state} bundleSize="6kb" to="/hurdles">Tech hurdles</LinkWithStatus>
+        <LinkWithStatus state={state} bundleSize="6kb" to="/pokemons">Pokemons</LinkWithStatus>
+        <LinkWithStatus state={state} bundleSize="6kb" to="/rickandmorty">Rick and morty characters</LinkWithStatus>
+        <LinkWithStatus state={state} bundleSize="6kb" to="/invalid">Invalid</LinkWithStatus>
       </nav>
     </div>
     <footer>

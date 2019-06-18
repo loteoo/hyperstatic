@@ -3,7 +3,7 @@
 
 This project basically trying to be a simpler, Gatsby alternative.
 
-Main difference being that instead of using GraphQL and many more complexities to handle your data, you just use a simple state, the hyperapp API and vanilla javascript.
+Main difference being that instead of using GraphQL and many more complexities to handle your data, you put everything in the state or in the component using the hyperapp API and vanilla javascript.
 
 
 This site is just a demo to get the word out potentially some help and assistance.

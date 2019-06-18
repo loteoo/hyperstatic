@@ -30,7 +30,7 @@ async function crawler({ url, browser }) {
 
 
 
-(async function fetchAllPages() {
+(async function renderPages() {
 
   const domain = "http://localhost:1234";
   const staticRoutes = Object.keys(routes).filter(route => !route.includes('/:'))
