@@ -32,7 +32,7 @@ async function crawler({ url, browser }) {
 
 (async function renderPages() {
 
-  const domain = "http://localhost:8080";
+  const baseUrl = 'http://localhost:8080'
   const staticRoutes = Object.keys(routes).filter(route => !route.includes('/:'))
   const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
 
@@ -42,7 +42,7 @@ async function crawler({ url, browser }) {
 
 
   const crawls = allPages.map(page => crawler({
-    url: `${domain}${page}`,
+    url: `${baseUrl}${page}`,
     browser
   }))
 
@@ -54,11 +54,18 @@ async function crawler({ url, browser }) {
 
     const pagePath = allPages[i]
 
+    if (!html) {
+      console.log('Empty page: ' + pagePath)
+      return
+    }
+
+    const cleanedUp = html.replace(baseUrl, '')
+
     const pageName = pagePath == '/' ? '/index.html' : `${pagePath}/index.html`
 
     const outputPath = path.join(__dirname, '..', 'dist', pageName)
 
-    fse.outputFile(outputPath, html)
+    fse.outputFile(outputPath, cleanedUp)
       .then(() => console.log(`Page created: ${outputPath}`))
       .catch(console.error)
   })
