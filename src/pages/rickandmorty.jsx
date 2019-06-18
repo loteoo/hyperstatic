@@ -1,4 +1,4 @@
-import { h } from 'hyperapp'
+
 import {Link} from '../../site-generator/utils'
 import { Http, preloadImage } from '../utils'
 

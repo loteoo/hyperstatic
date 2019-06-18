@@ -61,26 +61,25 @@ const TriggerRouteLoad = (state, path) => {
   const routes = Object.keys(state.routes).map(route => state.routes[route])
   const matchedRoute = routes.find(route => route.pattern.match(path))
 
-  if (matchedRoute) {
-    return [
-      {
-        ...state,
-        routes: {
-          ...state.routes,
-          [matchedRoute.route]: {
-            ...matchedRoute,
-            loading: true
-          }
+  console.log('TriggerRouteLoad')
+
+  return [
+    {
+      ...state,
+      routes: {
+        ...state.routes,
+        [matchedRoute.route]: {
+          ...matchedRoute,
+          loading: true
         }
-      },
-      LoadRoute({
-        action: ViewLoaded,
-        route: matchedRoute.route,
-        viewPromise: matchedRoute.viewPromise
-      })
-    ]
-  }
-  return state
+      }
+    },
+    LoadRoute({
+      action: ViewLoaded,
+      route: matchedRoute.route,
+      viewPromise: matchedRoute.viewPromise
+    })
+  ]
 }
 
 // Link component
@@ -99,7 +98,7 @@ export const Link = ({to, state, ...props}, children) => {
         ev.preventDefault()
       }
     ],
-    ...(!loaded && {onmouseover: [TriggerRouteLoad, to]}),
+    ...(matchedRoute && !loaded && {onmouseover: [TriggerRouteLoad, to]}),
     ...props
   }
 
@@ -134,6 +133,7 @@ export const ParseUrl = (state, {path, query}) => {
   const routes = Object.keys(state.routes).map(route => state.routes[route])
   const matchedRoute = routes.find(route => route.pattern.match(withoutTrailingSlash))
   const match = matchedRoute && matchedRoute.pattern.match(withoutTrailingSlash)
+  const loaded = matchedRoute && matchedRoute.view
 
   // Set
   const next = {
@@ -148,7 +148,7 @@ export const ParseUrl = (state, {path, query}) => {
 
 
 
-  return matchedRoute ? TriggerRouteLoad(next, path) : next
+  return matchedRoute && !loaded ? TriggerRouteLoad(next, path) : next
 }
 
 

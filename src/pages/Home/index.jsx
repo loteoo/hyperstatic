@@ -1,4 +1,3 @@
-import { h } from 'hyperapp'
 
 import markdown from './home.md'
 

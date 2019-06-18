@@ -1,5 +1,3 @@
-import { h } from 'hyperapp'
-
 
 // Home page
 export default state => (

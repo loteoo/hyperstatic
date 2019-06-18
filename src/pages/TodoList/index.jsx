@@ -1,24 +1,4 @@
 
-import markdown from './counter.md'
-
-
-export const Init = (state) => ({
-  ...state,
-  counter: 0
-})
-
-const Increment = (state) => ({
-  ...state,
-  counter: state.counter + 1
-})
-
-const Decrement = (state) => ({
-  ...state,
-  counter: state.counter - 1
-})
-
-
-
 
 export default (state) => (
   <div key="counter">

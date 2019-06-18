@@ -1,4 +1,3 @@
-import { h } from 'hyperapp'
 
 import {Router} from '../site-generator/utils'
 import Sidebar from './components/Sidebar'

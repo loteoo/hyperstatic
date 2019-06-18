@@ -1,4 +1,3 @@
-import { h } from 'hyperapp'
 
 import {FetchPokedex} from '../actions'
 import { Link } from '../../site-generator/utils';
