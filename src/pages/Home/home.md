@@ -54,9 +54,9 @@ The `<Link></Link>` component works just like your traditionnal Hyperapp / React
 
 `<Link to="/my-awesome-page>My awesome page!</Link>`  
 or  
-`<Link to="/products/:category/:id>My awesome page!</Link>`  
+`<Link to="/products/-some-slug/7839>My awesome page!</Link>`  
 
-Except they do more stuff under the hood.
+**Except they do more stuff under the hood.**
 
 Here is what is going on in the background.
 

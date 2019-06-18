@@ -41,14 +41,14 @@ export default ({state}) => (
       </header>
       <nav role="navigation">
         <ul>
-          <li><LinkWithStatus state={state} to="/">Home</LinkWithStatus></li>
-          <li><LinkWithStatus state={state} to="/project">The project</LinkWithStatus></li>
-          <li><LinkWithStatus state={state} to="/architecture">Architecture</LinkWithStatus></li>
-          <li><LinkWithStatus state={state} to="/counter">Counter</LinkWithStatus></li>
-          <li><LinkWithStatus state={state} to="/hurdles">Tech hurdles</LinkWithStatus></li>
-          <li><LinkWithStatus state={state} to="/pokemons">Pokemons</LinkWithStatus></li>
-          <li><LinkWithStatus state={state} to="/rickandmorty">Rick and morty characters</LinkWithStatus></li>
-          <li><LinkWithStatus state={state} to="/invalid">Invalid</LinkWithStatus></li>
+          <li><LinkWithStatus state={state} to="/">Home <b>6kb</b></LinkWithStatus></li>
+          <li><LinkWithStatus state={state} to="/project">The project <b>6kb</b></LinkWithStatus></li>
+          <li><LinkWithStatus state={state} to="/architecture">Architecture <b>6kb</b></LinkWithStatus></li>
+          <li><LinkWithStatus state={state} to="/counter">Counter <b>6kb</b></LinkWithStatus></li>
+          <li><LinkWithStatus state={state} to="/hurdles">Tech hurdles <b>6kb</b></LinkWithStatus></li>
+          <li><LinkWithStatus state={state} to="/pokemons">Pokemons <b>6kb</b></LinkWithStatus></li>
+          <li><LinkWithStatus state={state} to="/rickandmorty">Rick and morty characters <b>6kb</b></LinkWithStatus></li>
+          <li><LinkWithStatus state={state} to="/invalid">Invalid <b>6kb</b></LinkWithStatus></li>
         </ul>
       </nav>
     </div>
