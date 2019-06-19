@@ -41,6 +41,12 @@ const ViewLoaded = (state, {route, view, Init}) => {
     }
   }
 
+  // TODO:
+  // Serialize the state with the view into the <head> for pupeteer to pickup, and first renders to be quick. (data pre-fetched)
+  // await page.setUserAgent('puppeteer');
+  // window.navigator.userAgent === 'puppeteer'
+
+
   return Init ? Init(loaded) : loaded
 
 }
