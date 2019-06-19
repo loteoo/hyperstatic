@@ -1,19 +1,16 @@
 const uuid = () => Math.random().toString(36).substring(7)
 
-export const Init = (state) => ({
+export const InitAction = (state) => ({
   ...state,
+  todoInput: '',
   todos: []
 })
 
-export const SetInput = (state, ev) => ({
+export const SetInput = (state, value) => ({
   ...state,
-  todoInput: ev.target.value
+  todoInput: value
 })
 
-export const ToggleStateViewer = (state) => ({
-  ...state,
-  showState: !state.showState
-})
 
 export const AddItem = (state, ev) => {
   ev.preventDefault()
@@ -22,7 +19,7 @@ export const AddItem = (state, ev) => {
     todoInput: '',
     todos: state.todos.concat({
       id: uuid(),
-      value: state.input,
+      value: state.todoInput,
       done: false,
       editing: false
     })

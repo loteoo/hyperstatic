@@ -16,9 +16,9 @@ const Decrement = (state) => ({
 })
 
 export default (state) => (
-  <div key="counter">
+  <div>
     <div innerHTML={intro}></div>
-    <div class="counter">
+    <div>
       <h2>Counter</h2>
       <h1>{state.counter}</h1>
       <button onclick={Decrement}>-</button>

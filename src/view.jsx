@@ -9,7 +9,7 @@ export default state => {
     <div id="app" class="layout" role="document">
       <Sidebar state={state} />
       <main role="main" class="main-content">
-        <div class="box">
+        <div key={state.location.path} class="box">
           {Router(state)}
         </div>
       </main>

@@ -1,7 +1,7 @@
 
 import {Link} from '../../site-generator/Link'
 
-import {Invalid, Iddle, Loading, Ready} from './icons'
+import {Invalid, Loading, Check} from './icons'
 
 
 const LinkWithStatus = ({state, to, bundleSize, ...props}, children) => {
@@ -9,10 +9,10 @@ const LinkWithStatus = ({state, to, bundleSize, ...props}, children) => {
 
   const statusToSvg = {
     'invalid': Invalid,
-    'iddle': () => <b>{bundleSize}</b>,
+    'iddle': () => <span>{bundleSize}</span>,
     'loading': Loading,
-    'ready': Ready,
-    'active': Ready
+    'ready': Check,
+    'active': Check
   }
 
   const routes = Object.keys(state.routes).map(route => state.routes[route])
@@ -50,14 +50,11 @@ export default ({state}) => (
         <LinkWithStatus state={state} bundleSize="6kb" to="/project">The project</LinkWithStatus>
         <LinkWithStatus state={state} bundleSize="6kb" to="/starter">Starter template</LinkWithStatus>
         <LinkWithStatus state={state} bundleSize="6kb" to="/counter">Counter</LinkWithStatus>
-        <LinkWithStatus state={state} bundleSize="6kb" to="/hurdles">Tech hurdles</LinkWithStatus>
+        <LinkWithStatus state={state} bundleSize="6kb" to="/todo-list">Todo list</LinkWithStatus>
         <LinkWithStatus state={state} bundleSize="6kb" to="/pokemons">Pokemons</LinkWithStatus>
         <LinkWithStatus state={state} bundleSize="6kb" to="/rickandmorty">Rick and morty characters</LinkWithStatus>
         <LinkWithStatus state={state} bundleSize="6kb" to="/invalid">Invalid</LinkWithStatus>
       </nav>
     </div>
-    <footer>
-      Built with...
-    </footer>
   </aside>
 )

@@ -2,7 +2,7 @@
 
 #### Very fast
 
-It's built using an experimental code splitting and navigation layer on top of hyperapp.
+It's built using an experimental code splitting and navigation layer on top of Hyperapp 2.0.
 
 It is meant to be deployed on static hosting services like Netlify or Github Pages, which are often free, efficient, highly scalable and a lot more.
 
@@ -14,7 +14,7 @@ Here are the pieces:
 
 
 ## Pages 
-Pages are hyperapp components (pure view functions) that receive the state.
+Pages are Hyperapp components (pure view functions) that receive the state.
 
 They are bundled in their own file using parcel's [dynamic imports](https://parceljs.org/code_splitting.html). 
 
@@ -23,7 +23,7 @@ The bundles are loaded in the background when links pointing to them enter the v
 
 If they need dynamic runtime data, they get it from the state as usual.
 
-Pages can export a `Init` hyperapp Action which gets triggered when the page's bundle has been downloaded. Not to confuse with an `OnNavigation` action which would be triggered when a page apprears on screen.
+Pages can export a `Init` Hyperapp Action which gets triggered when the page's bundle has been downloaded. Not to confuse with an `OnNavigation` action which would be triggered when a page apprears on screen.
 
 This `Init` Action can be used to setup the state in advance for the page or load data ahead of time via side-effects.
 

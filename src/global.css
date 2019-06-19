@@ -103,7 +103,7 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: underline;
   }
   svg {
-    width: 3rem;
+    margin-left: auto;
   }
   &.invalid {
     color: var(--danger-color);
@@ -130,8 +130,8 @@ h1, h2, h3, h4, h5, h6 {
       stroke: currentColor;
     }
   }
-  b {
-    margin-left: 0.5rem;
+  span {
+    margin-left: auto;
   }
 }
 
