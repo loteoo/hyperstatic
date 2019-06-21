@@ -15,7 +15,7 @@ export const Link = ({to, state, scrollToTop, ...props}, children) => {
     onmousedown: [Navigate, ev => {
       if (ev.button === 0) {
 
-        // TODO: move this somewhere else
+        // TODO: move this somewhere else (on location changed, not on click. dont forget about navigator prev/next buttons)
         if (matchedRoute && !loaded && !active && scrollToTop) {
           window.scrollTo(0, 0)
         }
