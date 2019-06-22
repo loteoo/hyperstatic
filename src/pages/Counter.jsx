@@ -22,5 +22,6 @@ export default (state) => (
     <h1>{state.counter}</h1>
     <button onclick={Decrement}>-</button>
     <button onclick={Increment}>+</button>
+    <p>Have a look at the code for this example <a href="https://github.com/loteoo">here</a>!</p>
   </div>
 )

@@ -1,21 +1,19 @@
 # This site is fast
 
-It's built using an experimental code splitting and navigation layer on top of Hyperapp 2.0.
+It was built using an experimental code splitting and navigation layer on top of **Hyperapp 2.0**, then pre-rendered using a pupeteer script.
+
+This *layer* is a site generator / framework with goals similar to Gatsby.js, but it is simpler, lighter and is for building Hyperapp based websites.
 
 It is meant to be deployed on static hosting services like Netlify or Github Pages, which are often free, efficient, highly scalable and a lot more.
 
-Pages are bundled individually and loaded asynchronously at the right time using a very smart `<Link>` component. They all still share the same global state and Hyperapp instance.
-
-
-
-Here are the pieces:
+Pages are bundled individually and loaded asynchronously at the right time using a very smart `<Link>` component. They all still share the same global state and run in the same Hyperapp instance.
 
 
 
 
 ## Routing
 
-To route your app, you list all your route patterns in a `routes.js` file, and map these routes to your page components using parcel's `import` function.
+To route your app, list all your route patterns in a `routes.js` file, and map these routes to your page components using parcel's `import` function.
 
 This is the routing for this site:
 
@@ -23,11 +21,9 @@ This is the routing for this site:
 export default {
   '/': import('./pages/Home'),
   '/project': import('./pages/Project'),
-  '/architecture': import('./pages/Architecture'),
-  '/hurdles': import('./pages/Hurdles'),
-  '/rickandmorty': import('./pages/RickAndMorty'),
+  '/starter': import('./pages/Starter'),
+  '/counter': import('./pages/Counter'),
   '/pokemons': import('./pages/Pokemons'),
-  '/pokemons/:id': import('./pages/Pokemon')
 }
 ```
 
@@ -36,7 +32,7 @@ The `import(...)` function indicates parcel to bundle each page in it's own bund
 
 
 
-## Link
+## Navigation
 
 The `<Link>` component works just like your typical Hyperapp / React / Gatsby `<Link>` component. Use use them like this:
 
@@ -89,11 +85,11 @@ This `Init` Action can be used to setup the state in advance for the page or loa
 
 Pre-rendering the site is actually optionnal. The entire site will still work perfectly without it, but doing it still has some nice benefits. 
 
-Even if Hyperapp's tiny size and quick rendering brings your TTI to a negligable number, there will always be users with a very slow network connection and low-end device who will benefit from this. 
+Even if Hyperapp's tiny size and quick rendering brings your TTI to a negligable number, there will always be users with slow network connections and low-end devices who will benefit from this. 
 
-There also SEO benefits to this.
+This also allows your site to be indexed faster by search engines.
 
-To render your static routes, run this command:
+To render your routes, run this command:
 
 ```
 npm run render-pages

@@ -1,6 +1,6 @@
 {
   "short_name": "Hyperapp",
-  "name": "Hyperapp boilerplate",
+  "name": "Hyperapp site generator",
   "description": "Hyperapp starter kit with development on steroids",
   "display": "fullscreen",
   "scope": "/",
