@@ -23,12 +23,15 @@ export default state => (
   <main>
     <h2>All pokemons:</h2>
     <div style={grid}>
-      {state.pokemons && state.pokemons.map(pokemon => (
-        <Link state={state} to={`/pokemons/${pokemon.id}`} style={card}>
-          <img src={pokemon.img} alt={pokemon.name} />
-          <span>{pokemon.name}</span>
-        </Link>
-      ))}
+      {state.pokemons
+        ? state.pokemons.map(pokemon => (
+          <Link state={state} to={`/pokemons/${pokemon.id}`} style={card}>
+            <img src={pokemon.img} alt={pokemon.name} />
+            <span>{pokemon.name}</span>
+          </Link>
+        ))
+        : 'Pokemons are loading!'
+      }
     </div>
   </main>
 )

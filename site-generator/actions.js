@@ -41,19 +41,22 @@ const ViewLoaded = (state, {route, view, Init}) => {
     }
   }
 
-  const initialized = Init ? Init(loaded) : loaded
-
-
-
-  if (window.navigator.userAgent === 'puppeteer') {
-    const scriptTag = document.createElement('script')
-    scriptTag.text = `
-      window.firstRenders = {
-        '${route}': ${JSON.stringify(view(initialized))}
+  const withFirstRender = window.navigator.userAgent === 'puppeteer'
+    ? {
+      ...loaded,
+      routes: {
+        ...loaded.routes,
+        [route]: {
+          ...loaded.routes[route],
+          firstRender: view(loaded)
+        }
       }
-    `
-    document.body.appendChild(scriptTag)
-  }
+    }
+    : loaded
+
+
+  const initialized = Init ? Init(withFirstRender) : withFirstRender
+
 
   return initialized
 }

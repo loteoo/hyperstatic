@@ -14,10 +14,14 @@ async function crawler({ url, browser }) {
     page = await browser.newPage();
 
     await page.setUserAgent('puppeteer');
-    //networkidle0: consider navigation to be finished when
-    //there are no more than 2 network connections for at least 500 ms.
-    //(https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagegobackoptions)
+
+    page.on("pageerror", function(err) {
+      const theTempValue = err.toString();
+      console.log("Page error: " + theTempValue);
+    })
+
     await page.goto(url, { waitUntil: "networkidle0" });
+
     html = await page.content();
   } catch (e) {
       debug.warn(`Not able to fetch ${url}`);
@@ -34,7 +38,7 @@ async function crawler({ url, browser }) {
 
 (async function renderPages() {
 
-  const baseUrl = 'http://localhost:8080'
+  const baseUrl = 'http://localhost:1234'
   const staticRoutes = Object.keys(routes).filter(route => !route.includes('/:'))
   const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
 

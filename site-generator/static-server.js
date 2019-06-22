@@ -13,6 +13,10 @@ http.createServer(function (request, response) {
 
   filePath = path.join(__dirname, '..', 'dist', filePath)
 
+   if (!filePath.includes('.')) {
+    filePath = filePath + '/index.html'
+  }
+
   var extname = String(path.extname(filePath)).toLowerCase();
   var mimeTypes = {
     '.html': 'text/html',
@@ -52,5 +56,5 @@ http.createServer(function (request, response) {
     }
   });
 
-}).listen(8080);
-console.log('Server running at http://localhost:8080/');
+}).listen(1234);
+console.log('Server running at http://localhost:1234/');
