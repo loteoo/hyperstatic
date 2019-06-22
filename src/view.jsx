@@ -4,7 +4,7 @@ import Sidebar from './components/Sidebar'
 
 // root view
 export default state => {
-  console.log('view', state)
+  console.log('State', state)
   return (
     <div id="app" class="layout" role="document">
       <Sidebar state={state} />

@@ -50,10 +50,7 @@ export default ({state}) => (
         <LinkWithStatus state={state} bundleSize="6kb" to="/project">The project</LinkWithStatus>
         <LinkWithStatus state={state} bundleSize="6kb" to="/starter">Starter template</LinkWithStatus>
         <LinkWithStatus state={state} bundleSize="6kb" to="/counter">Counter</LinkWithStatus>
-        <LinkWithStatus state={state} bundleSize="6kb" to="/todo-list">Todo list</LinkWithStatus>
-        <LinkWithStatus state={state} bundleSize="6kb" to="/pokemons">Pokemons</LinkWithStatus>
-        <LinkWithStatus state={state} bundleSize="6kb" to="/rickandmorty">Rick and morty characters</LinkWithStatus>
-        <LinkWithStatus state={state} bundleSize="6kb" to="/invalid">Invalid</LinkWithStatus>
+        <LinkWithStatus state={state} bundleSize="6kb" to="/pokedex">Pokedex</LinkWithStatus>
       </nav>
     </div>
   </aside>

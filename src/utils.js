@@ -1,4 +1,5 @@
 
+export const targetValue = event => event.target.value
 
 export const preloadImage = (url) => {
   const img = new Image()
@@ -14,3 +15,4 @@ const fetchFx = (dispatch, props) =>
 export const Http = {
   get: (props) => [fetchFx, props]
 }
+

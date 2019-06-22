@@ -38,7 +38,7 @@ async function crawler({ url, browser }) {
 
 (async function renderPages() {
 
-  const baseUrl = 'http://localhost:1234'
+  const baseUrl = 'http://localhost:8080'
   const staticRoutes = Object.keys(routes).filter(route => !route.includes('/:'))
   const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
 

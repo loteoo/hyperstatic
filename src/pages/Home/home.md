@@ -1,7 +1,5 @@
 # This site is fast
 
-#### Very fast
-
 It's built using an experimental code splitting and navigation layer on top of Hyperapp 2.0.
 
 It is meant to be deployed on static hosting services like Netlify or Github Pages, which are often free, efficient, highly scalable and a lot more.
@@ -13,25 +11,11 @@ Pages are bundled individually and loaded asynchronously at the right time using
 Here are the pieces:
 
 
-## Pages 
-Pages are Hyperapp components (pure view functions) that receive the state.
-
-They are bundled in their own file using parcel's [dynamic imports](https://parceljs.org/code_splitting.html). 
-
-The bundles are loaded in the background when links pointing to them enter the viewport, or when a user hovers on their corresponding links.
-
-
-If they need dynamic runtime data, they get it from the state as usual.
-
-Pages can export a `Init` Hyperapp Action which gets triggered when the page's bundle has been downloaded. Not to confuse with an `OnNavigation` action which would be triggered when a page apprears on screen.
-
-This `Init` Action can be used to setup the state in advance for the page or load data ahead of time via side-effects.
-
 
 
 ## Routing
 
-To route your app, you list all your route patterns in a `routes.js` file, and map these routes to your page components.
+To route your app, you list all your route patterns in a `routes.js` file, and map these routes to your page components using parcel's `import` function.
 
 This is the routing for this site:
 
@@ -47,9 +31,9 @@ export default {
 }
 ```
 
-You need to use the `import(...)` statement for each route to indicate parcel to bundle the file in it's own bundle.
+The `import(...)` function indicates parcel to bundle each page in it's own bundle. These bundles will be loaded asynchronously during your application's runtime.
 
-The routes are actually loaded into the state, which allows the application to be aware of the status of each route. This is also necessary for many of the `Link` component's functionnalities.
+
 
 
 ## Link
@@ -58,7 +42,7 @@ The `<Link>` component works just like your typical Hyperapp / React / Gatsby `<
 
 `<Link to="/my-awesome-page>My awesome page!</Link>`  
 or  
-`<Link to="/products/-some-slug/7839>My awesome page!</Link>`  
+`<Link to="/products/some-slug/7839>My awesome product by ID!</Link>`  
 
 **Except they do more stuff under the hood.**
 
@@ -78,6 +62,26 @@ Each link is aware of the page bundle it points to. Links have 4 statuses:
   The route has been activated, the matching page is being viewed.
 
 For this technical demo, the statuses for each link is being shown with an icon, but usually, this would all be transparent to the user.
+
+
+
+
+
+## Pages 
+Pages are Hyperapp components (view functions) that receive the state.
+
+They are bundled in their own file using parcel's [dynamic imports](https://parceljs.org/code_splitting.html). 
+
+The bundles are loaded in the background when links pointing to them enter the viewport, or when a user hovers on their corresponding links.
+
+
+If they need dynamic runtime data, they get it from the state as usual.
+
+Pages can export a `Init` Hyperapp Action which gets triggered when the page's bundle has been downloaded. Not to confuse with an `OnNavigation` action which would be triggered when a page apprears on screen.
+
+This `Init` Action can be used to setup the state in advance for the page or load data ahead of time via side-effects.
+
+
 
 
 

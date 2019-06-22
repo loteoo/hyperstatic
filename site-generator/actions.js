@@ -5,8 +5,6 @@ import {LoadRoute, ChangeLocation} from './effects'
 // Sets a value to the given key in the state
 export const ParseUrl = (state, {path, query}) => {
 
-  // console.log('ParseURL', state);
-
   // Ignore trailing slashes EXPEPT for home page
   const withoutTrailingSlash = path !== '/' ? path.replace(/\/$/, '') : path
   const routes = Object.keys(state.routes).map(route => state.routes[route])

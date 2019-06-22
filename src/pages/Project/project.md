@@ -1,9 +1,9 @@
 
 # In a nutshell
 
-This project basically trying to be a simpler, Gatsby alternative.
+This project basically trying to be a simpler, lighter, faster, Gatsbyjs alternative.
 
-Main difference being that instead of using GraphQL and many more complexities to handle your data, you put everything in the state or in the component using the hyperapp API and vanilla javascript.
+Main difference being that instead of using GraphQL and many more complexities to handle your data, you just put everything in the state using the hyperapp APIs and vanilla javascript.
 
 It started out as a boilerplate but it made more sense to make a seperate package instead.
 
