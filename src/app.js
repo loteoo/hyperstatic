@@ -21,6 +21,6 @@ app({
 })
 
 // Enable the service worker in production
-if (process.env.NODE_ENV === 'production') {
-  navigator.serviceWorker.register(`${window.location.origin}/sw.js`)
-}
+// if (process.env.NODE_ENV === 'production') {
+//   navigator.serviceWorker.register(`${window.location.origin}/sw.js`)
+// }

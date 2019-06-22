@@ -43,7 +43,7 @@ export default ({state}) => (
     <div class="menu">
       <header role="banner">
         <h1>Hyperapp site generator</h1>
-        <p>Static site boilerplate / framework with a fancy code splitting and navigation layer</p>
+        <p>Static site generator with a fancy code splitting and navigation layer</p>
       </header>
       <nav role="navigation">
         <LinkWithStatus state={state} bundleSize="6kb" to="/">Home</LinkWithStatus>

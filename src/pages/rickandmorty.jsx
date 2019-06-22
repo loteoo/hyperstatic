@@ -20,7 +20,7 @@ const card = {
 
 
 export default state => (
-  <main>
+  <div>
     <h2>All pokemons:</h2>
     <div style={grid}>
       {state.rickAndMortyCharacters && state.rickAndMortyCharacters.map(character => (
@@ -30,7 +30,7 @@ export default state => (
         </Link>
       ))}
     </div>
-  </main>
+  </div>
 )
 
 

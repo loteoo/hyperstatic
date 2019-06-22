@@ -9,7 +9,7 @@ export const Init = InitAction
 
 const targetValue = event => event.target.value
 
-export default (state) => (
+export default (state) => state.todos && (
   <div>
     <h2>Todo list</h2>
     <p>A little more complex than a counter</p>

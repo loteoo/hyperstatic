@@ -5,25 +5,27 @@ import {LoadRoute, ChangeLocation} from './effects'
 // Sets a value to the given key in the state
 export const ParseUrl = (state, {path, query}) => {
 
+  // console.log('ParseURL', state);
+
   // Ignore trailing slashes EXPEPT for home page
   const withoutTrailingSlash = path !== '/' ? path.replace(/\/$/, '') : path
   const routes = Object.keys(state.routes).map(route => state.routes[route])
   const matchedRoute = routes.find(route => route.pattern.match(withoutTrailingSlash))
-  const match = matchedRoute && matchedRoute.pattern.match(withoutTrailingSlash)
+  const matchParams = matchedRoute && matchedRoute.pattern.match(withoutTrailingSlash)
   const loaded = matchedRoute && matchedRoute.view
 
-  // Set
+  // Set location params
   const next = {
     ...state,
     location: {
       route: matchedRoute && matchedRoute.route,
-      params: match || {},
+      params: matchParams || {},
       queryParams: queryString.parse(query),
       path: withoutTrailingSlash
     }
   }
 
-  return (matchedRoute && !loaded) ? TriggerRouteLoad(next, path) : next
+  return (matchedRoute && !loaded) ? TriggerRouteLoad(next, withoutTrailingSlash) : next
 }
 
 
@@ -41,24 +43,7 @@ const ViewLoaded = (state, {route, view, Init}) => {
     }
   }
 
-  const withFirstRender = window.navigator.userAgent === 'puppeteer'
-    ? {
-      ...loaded,
-      routes: {
-        ...loaded.routes,
-        [route]: {
-          ...loaded.routes[route],
-          firstRender: view(loaded)
-        }
-      }
-    }
-    : loaded
-
-
-  const initialized = Init ? Init(withFirstRender) : withFirstRender
-
-
-  return initialized
+  return Init ? Init(loaded) : loaded
 }
 
 
@@ -73,9 +58,10 @@ export const Navigate = (state, to) => {
 export const TriggerRouteLoad = (state, path) => {
 
   const routes = Object.keys(state.routes).map(route => state.routes[route])
+
   const matchedRoute = routes.find(route => route.pattern.match(path))
 
-  console.log('TriggerRouteLoad')
+  // console.log('TriggerRouteLoad', state)
 
   return [
     {

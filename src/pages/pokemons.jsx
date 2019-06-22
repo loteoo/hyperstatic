@@ -20,7 +20,7 @@ const card = {
 
 
 export default state => (
-  <main>
+  <div>
     <h2>All pokemons:</h2>
     <div style={grid}>
       {state.pokemons
@@ -33,6 +33,6 @@ export default state => (
         : 'Pokemons are loading!'
       }
     </div>
-  </main>
+  </div>
 )
 

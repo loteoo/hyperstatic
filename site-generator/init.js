@@ -1,19 +1,20 @@
 import UrlPattern from 'url-pattern'
 
 import routes from '../src/routes'
-import userInit from '../src/init'
+import extraInit from '../src/init'
 
 import {ParseUrl} from './actions'
 
 // Build routes object
-const routesData = Object.keys(routes).reduce((pages, route) => ({
-  ...pages,
+const buildRoutesObject = (routes) => Object.keys(routes).reduce((routesObj, route) => ({
+  ...routesObj,
   [route]: {
+    ...routesObj[route],
     route,
     viewPromise: routes[route],
     pattern: new UrlPattern(route)
   }
-}), {})
+}), window.initialState ? window.initialState.routes : {})
 
 // Initial state of the app
 const init = {
@@ -27,8 +28,9 @@ const init = {
     queryParams: {},
     route: null
   },
-  routes: routesData,
-  ...userInit
+  ...extraInit,
+  ...window.initialState,
+  routes: buildRoutesObject(routes),
 }
 
 const withParsedUrl = ParseUrl(init, {
