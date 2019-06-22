@@ -1,3 +1,4 @@
+import { h } from 'hyperapp'
 
 /**
  * Html to hyperapp VDOM converter
