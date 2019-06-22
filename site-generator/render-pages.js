@@ -12,6 +12,8 @@ async function crawler({ url, browser }) {
 
   try {
     page = await browser.newPage();
+
+    await page.setUserAgent('puppeteer');
     //networkidle0: consider navigation to be finished when
     //there are no more than 2 network connections for at least 500 ms.
     //(https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagegobackoptions)

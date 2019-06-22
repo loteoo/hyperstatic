@@ -7,7 +7,8 @@
   "scripts": {
     "start": "parcel src/index.html --open",
     "build": "rimraf .cache && rimraf dist && parcel build ./src/index.html --no-source-maps --detailed-report && workbox generateSW workbox-config.js",
-    "render-pages": "parcel build ./site-generator/render-pages.js --target node --no-minify --no-source-maps --detailed-report --no-content-hash && node ./dist/render-pages.js"
+    "render-pages": "parcel build ./site-generator/render-pages.js --target node --no-minify --no-source-maps --detailed-report --no-content-hash && node ./dist/render-pages.js",
+    "static-server": "node ./site-generator/static-server.js"
   },
   "dependencies": {
     "front-matter": "^3.0.2",

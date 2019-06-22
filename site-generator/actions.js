@@ -1,6 +1,6 @@
 import queryString from 'query-string'
-
 import {LoadRoute, ChangeLocation} from './effects'
+
 
 // Sets a value to the given key in the state
 export const ParseUrl = (state, {path, query}) => {
@@ -41,14 +41,21 @@ const ViewLoaded = (state, {route, view, Init}) => {
     }
   }
 
-  // TODO:
-  // Serialize the state with the view into the <head> for pupeteer to pickup, and first renders to be quick. (data pre-fetched)
-  // await page.setUserAgent('puppeteer');
-  // window.navigator.userAgent === 'puppeteer'
+  const initialized = Init ? Init(loaded) : loaded
 
 
-  return Init ? Init(loaded) : loaded
 
+  if (window.navigator.userAgent === 'puppeteer') {
+    const scriptTag = document.createElement('script')
+    scriptTag.text = `
+      window.firstRenders = {
+        '${route}': ${JSON.stringify(view(initialized))}
+      }
+    `
+    document.body.appendChild(scriptTag)
+  }
+
+  return initialized
 }
 
 

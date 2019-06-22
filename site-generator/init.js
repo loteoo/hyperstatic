@@ -9,6 +9,9 @@ import {ParseUrl} from './actions'
 const routesData = Object.keys(routes).reduce((pages, route) => ({
   ...pages,
   [route]: {
+    ...(window.firstRenders && window.firstRenders[route] && {
+      firstRender: window.firstRenders[route]
+    }),
     route,
     viewPromise: routes[route],
     pattern: new UrlPattern(route)
