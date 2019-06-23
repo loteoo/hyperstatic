@@ -1,6 +1,6 @@
 export const grid = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
   gridGap: '1rem',
   margin: '1rem 0'
 }

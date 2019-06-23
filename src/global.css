@@ -141,7 +141,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .main-content {
-  max-width: 768px;
+  max-width: 750px;
   margin: 0 3rem 0 calc(30% + 3rem);
   padding: 6rem 0;
 }
