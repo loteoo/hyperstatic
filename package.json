@@ -1,7 +1,7 @@
 {
-  "version": "1.0.0",
+  "version": "0.0.1",
   "name": "hyperapp-site-generator",
-  "description": "Hyperapp PWA boilerplate",
+  "description": "Hyperapp static site framework",
   "author": "Alexandre Lotte",
   "license": "MIT",
   "scripts": {
@@ -10,7 +10,8 @@
     "create-service-worker": "workbox generateSW workbox-config.js",
     "build": "npm run clean && parcel build ./src/index.html --no-source-maps --detailed-report && npm run create-service-worker",
     "render-pages": "parcel build ./site-generator/render-pages.js --target node --no-minify --no-source-maps --detailed-report --no-content-hash && node ./dist/render-pages.js",
-    "static-server": "node ./site-generator/static-server.js"
+    "static-server": "node ./site-generator/static-server.js",
+    "test": "echo \"No test specified\""
   },
   "dependencies": {
     "emotion": "^10.0.9",
