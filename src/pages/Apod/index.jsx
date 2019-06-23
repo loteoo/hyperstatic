@@ -39,7 +39,8 @@ export const Init = (state) => [
   state,
   Http.get({
     url: 'https://api.nasa.gov/planetary/apod?api_key=8dUEsh65unCXLDx00RqiRtURx5DNLPSRCtbsJ8v2',
-    action: HandlePicture
+    action: HandlePicture,
+    error: console.error
   })
 ]
 

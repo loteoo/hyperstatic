@@ -9,7 +9,7 @@ It started out as a boilerplate but it made more sense to make a seperate packag
 
 This site is just a demo to get the word out potentially some help and assistance.
 
-The project is very early, it does not even have a name yet. Hypersite? Instasite? Hyperlite? Hyperlight? Dinglebop shleem? [Please help](https://github.com).
+The project is very early, it does not even have a name yet. Hypersite? Instasite? Hyperlite? Hyperlight? [Please help](https://github.com).
 
 Let me know what you think on github or the hyperapp slack!
 
