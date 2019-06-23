@@ -1,33 +1,23 @@
-import queryString from 'query-string'
 import {LoadRoute, ChangeLocation} from './effects'
 
+import {getPathInfo} from './utils'
 
 // Sets a value to the given key in the state
-export const ParseUrl = (state, {path, query}) => {
+export const ParseUrl = (state, path) => {
 
-  // Ignore trailing slashes EXPEPT for home page
-  const withoutTrailingSlash = path !== '/' ? path.replace(/\/$/, '') : path
-  const routes = Object.keys(state.routes).map(route => state.routes[route])
-  const matchedRoute = routes.find(route => route.pattern.match(withoutTrailingSlash))
-  const matchParams = matchedRoute && matchedRoute.pattern.match(withoutTrailingSlash)
-  const loaded = matchedRoute && matchedRoute.view
+  const location = getPathInfo(state, path)
 
   // Set location params
   const next = {
     ...state,
-    location: {
-      route: matchedRoute && matchedRoute.route,
-      params: matchParams || {},
-      queryParams: queryString.parse(query),
-      path: withoutTrailingSlash
-    }
+    location
   }
 
-  return (matchedRoute && !loaded) ? TriggerRouteLoad(next, withoutTrailingSlash) : next
+  return (location.route && !location.loaded) ? TriggerRouteLoad(next, location.path) : next
 }
 
 
-const ViewLoaded = (state, {route, view, Init}) => {
+const ViewLoaded = (state, {route, view, Init, path}) => {
 
   const loaded = {
     ...state,
@@ -41,7 +31,9 @@ const ViewLoaded = (state, {route, view, Init}) => {
     }
   }
 
-  return Init ? Init(loaded) : loaded
+  const location = getPathInfo(loaded, path)
+
+  return Init ? Init(loaded, location) : loaded
 }
 
 
@@ -56,9 +48,7 @@ export const Navigate = (state, to) => {
 export const TriggerRouteLoad = (state, path) => {
 
   const routes = Object.keys(state.routes).map(route => state.routes[route])
-
   const matchedRoute = routes.find(route => route.pattern.match(path))
-
   // console.log('TriggerRouteLoad', state)
 
   return [
@@ -73,6 +63,7 @@ export const TriggerRouteLoad = (state, path) => {
       }
     },
     LoadRoute({
+      path,
       action: ViewLoaded,
       route: matchedRoute.route,
       viewPromise: matchedRoute.viewPromise

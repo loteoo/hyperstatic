@@ -51,6 +51,7 @@ export default ({state}) => (
         <LinkWithStatus state={state} bundleSize="6kb" to="/starter">Starter template</LinkWithStatus>
         <LinkWithStatus state={state} bundleSize="6kb" to="/counter">Counter</LinkWithStatus>
         <LinkWithStatus state={state} bundleSize="6kb" to="/pokedex">Pokedex</LinkWithStatus>
+        <LinkWithStatus state={state} bundleSize="6kb" to="/books">Book search</LinkWithStatus>
       </nav>
     </div>
   </aside>

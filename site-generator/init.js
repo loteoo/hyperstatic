@@ -33,9 +33,6 @@ const init = {
   routes: buildRoutesObject(routes),
 }
 
-const withParsedUrl = ParseUrl(init, {
-  path: window.location.pathname,
-  query: window.location.search
-})
+const withParsedUrl = ParseUrl(init, window.location.pathname + window.location.search)
 
 export default withParsedUrl

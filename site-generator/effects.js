@@ -1,15 +1,16 @@
 
 // Load route FX
-const loadRouteFx = (dispatch, { action, route, viewPromise }) =>
+const loadRouteFx = (dispatch, { action, route, viewPromise, path }) =>
   viewPromise.then(importedModule => {
     dispatch([action, {
+      path,
       route,
       view: importedModule.default,
       Init: importedModule.Init
     }])
   })
 
-export const LoadRoute = ({action, route, viewPromise}) => [loadRouteFx, { action, route, viewPromise }]
+export const LoadRoute = ({action, route, viewPromise, path}) => [loadRouteFx, { action, route, viewPromise, path }]
 
 
 
