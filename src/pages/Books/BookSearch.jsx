@@ -2,6 +2,7 @@ import { css } from 'emotion'
 import { targetValue } from '../../utils'
 import { Init as BookInit, SearchBooks } from './actions'
 import BookPreview from './BookPreview'
+import description from './description.md'
 
 
 const pageStyle = css`
@@ -18,13 +19,10 @@ const pageStyle = css`
 
 export default (state) => {
 
-  const results = state.books.books
-    ? Object.keys(state.books.books).map(id => state.books.books[id])
-    : []
 
   return (
     <div class={pageStyle}>
-      <h2>Find a Book</h2>
+      <div innerHTML={description}></div>
       <label for="search">Search for a book</label>
       <input
         id="search"
@@ -33,15 +31,15 @@ export default (state) => {
         oninput={[SearchBooks, targetValue]}
       />
       <div>
-        {!state.books.books
+        {!state.books.results
           ? <h4>Search for any existing book!</h4>
-          : results.length === 0
+          : state.books.results === 0
             ? <h4>No results</h4>
             : (
               <div>
                 <h4>{state.books.total} books found!</h4>
                 <div class="grid">
-                  {results.map(book => <BookPreview book={book} state={state} />)}
+                  {state.books.results.map(id => <BookPreview book={state.books.books[id]} state={state} />)}
                 </div>
               </div>
             )

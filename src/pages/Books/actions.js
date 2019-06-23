@@ -13,7 +13,8 @@ const Setter = (state, fragment) => ({
 export const Init = (state) => Setter(state, {
   search: '',
   isFetching: false,
-  total: 0
+  total: 0,
+  books: {}
 })
 
 export const SearchBooks = (state, search) => {
@@ -34,13 +35,14 @@ export const SearchBooks = (state, search) => {
 
 const HandleResults = (state, response) => Setter(state, {
   isFetching: false,
+  results: response.items.map(book => book.id),
   books: response.items.reduce((books, book) => ({...books, [book.id]: book}), state.books.books),
   total: response.totalItems
 })
 
 
 export const LoadBookIfNeeded = (state, location) => {
-  if (state.books && state.books.books && state.books.books[location.params.id]) {
+  if (state.books && state.books.books[location.params.id]) {
     return state
   }
   return [
