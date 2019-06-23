@@ -14,26 +14,18 @@
     "test": "echo \"No test specified\""
   },
   "dependencies": {
-    "emotion": "^10.0.9",
     "fs-extra": "^8.0.1",
     "hyperapp": "^2.0.0-beta.22",
-    "node-fetch": "^2.6.0",
-    "postcss-modules": "^1.4.1",
     "puppeteer": "^1.17.0",
     "query-string": "^6.7.0",
-    "sanitize.css": "^8.0.1",
     "serialize-javascript": "^1.7.0",
-    "url-pattern": "^1.0.3"
-  },
-  "devDependencies": {
+    "url-pattern": "^1.0.3",
     "autoprefixer": "^9.6.0",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.2",
     "babel-plugin-jsx-pragmatic": "^1.0.2",
-    "hygen": "^4.0.2",
     "marked": "^0.6.2",
     "parcel-bundler": "^1.12.3",
-    "postcss-nested": "^4.1.2",
     "rimraf": "^2.6.3",
     "workbox-cli": "^4.3.1"
   }
