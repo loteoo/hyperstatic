@@ -42,10 +42,7 @@ async function crawler({ url, browser }) {
   const staticRoutes = Object.keys(routes).filter(route => !route.includes('/:'))
   const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
 
-  const extraPages = await createPages()
-
-  const allPages = staticRoutes.concat(extraPages)
-
+  const allPages = await createPages(staticRoutes)
 
   const crawls = allPages.map(page => crawler({
     url: `${baseUrl}${page}`,

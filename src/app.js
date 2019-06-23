@@ -10,13 +10,13 @@ import './global.css'
 import init from '../site-generator/init'
 import view from './view'
 
-
-
 // Initialize the app
 app({
   init,
   view,
-  subscriptions: state => [LocationChanged({action: ParseUrl})],
+  subscriptions: state => [
+    LocationChanged({action: ParseUrl})
+  ],
   node: document.getElementById('app')
 })
 

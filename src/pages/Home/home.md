@@ -24,8 +24,9 @@ export default {
   '/starter': import('./pages/Starter'),
   '/counter': import('./pages/Counter'),
   '/pokedex': import('./pages/Pokedex'),
+  '/apod': import('./pages/Apod'),
   '/books': import('./pages/Books/BookSearch'),
-  '/books/:id': import('./pages/Books/Book')
+  '/books/:id': import('./pages/Books/Book'),
 }
 ```
 
@@ -101,4 +102,4 @@ If you have dynamic routes that you want to render, you need to give an array of
 
 You can do this dynamically by adding javascript to the `createPages.js` file.
 
-All pages for this demo site has been pre-rendered. Try disabling javascript in your browser, everything should still mostly work!
+Try disabling javascript in your browser, everything should still mostly work!

@@ -12,25 +12,34 @@ export const Link = ({to, state, scrollToTop, ...props}, children) => {
 
   const attributes = {
     href: to,
-    onmousedown: [Navigate, ev => {
-      if (ev.button === 0) {
-
-        // TODO: move this somewhere else (on location changed, not on click. dont forget about navigator prev/next buttons)
-        if (matchedRoute && !loaded && !active && scrollToTop) {
-          window.scrollTo(0, 0)
-        }
-        return to
-      }
-      return
-    }],
     onclick: [
       state => state,
       ev => {
         ev.preventDefault()
       }
     ],
-    ...(matchedRoute && !loaded && {onmouseover: [TriggerRouteLoad, to]}),
     ...props
+  }
+
+  // If not already on that route
+  if (state.location.path !== to) {
+    attributes.onmousedown = [
+      Navigate, ev => {
+        if (ev.button === 0) {
+          // TODO: move this somewhere else (on location changed, not on click. dont forget about navigator prev/next buttons)
+          if (matchedRoute && !loaded && !active && scrollToTop) {
+            window.scrollTo(0, 0)
+          }
+          return to
+        }
+        return
+      }
+    ]
+  }
+
+  // If matching route is not loaded
+  if (matchedRoute && !loaded) {
+    attributes.onmouseover = [TriggerRouteLoad, to]
   }
 
   return h('a', attributes, children)
