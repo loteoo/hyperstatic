@@ -2,8 +2,6 @@ import puppeteer from 'puppeteer'
 import fse from 'fs-extra'
 import path from 'path'
 
-import routes from '../src/routes'
-import createPages from '../src/createPages'
 
 
 async function crawler({ url, browser }) {
@@ -35,14 +33,18 @@ async function crawler({ url, browser }) {
 
 
 
-
-(async function renderPages() {
+/**
+ *
+ * @param {Object} routes // Route patterns
+ * @param {Promise} getUrls // Urls to render
+ */
+export const renderPages = async (routes, getUrls) => {
 
   const baseUrl = 'http://localhost:8080'
   const staticRoutes = Object.keys(routes).filter(route => !route.includes('/:'))
   const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
 
-  const allPages = await createPages(staticRoutes)
+  const allPages = await getUrls(staticRoutes)
 
   const crawls = allPages.map(page => crawler({
     url: `${baseUrl}${page}`,
@@ -79,4 +81,4 @@ async function crawler({ url, browser }) {
   console.log('Pages saved!')
 
   return true
-})()
+}

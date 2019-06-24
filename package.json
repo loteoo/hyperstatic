@@ -5,8 +5,6 @@
   "author": "Alexandre Lotte",
   "license": "MIT",
   "scripts": {
-    "build": "npm run clean && parcel build ./src/index.html --no-source-maps --detailed-report && npm run create-service-worker",
-    "render-pages": "parcel build ./site-generator/render-pages.js --target node --no-minify --no-source-maps --detailed-report --no-content-hash && node ./dist/render-pages.js",
     "test": "echo \"No test specified\""
   },
   "dependencies": {

@@ -6,20 +6,19 @@ import htmlToVdom from './htmlToVdom'
 // Router component
 export const Router = state => {
 
-  // window.state = state
 
-  // // TODO: move this somewhere else
+  // State pre-fetching testing
   // if (window.navigator.userAgent === 'puppeteer') {
 
 
-  //   let scriptTag = document.getElementById('initialState')
+  //   let scriptTag = document.getElementById('initial-state')
 
   //   if (!scriptTag) {
   //     scriptTag = document.createElement('script')
   //     document.body.appendChild(scriptTag)
   //   }
 
-  //   scriptTag.id = 'initialState'
+  //   scriptTag.id = 'initial-state'
   //   scriptTag.text = `
   //     window.initialState = ${serialize(state)}
   //   `
