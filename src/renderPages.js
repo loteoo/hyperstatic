@@ -1,8 +1,8 @@
-import puppeteer from 'puppeteer'
-import fse from 'fs-extra'
-import path from 'path'
+const puppeteer = require('puppeteer')
+const fse = require('fs-extra')
+const path = require('path')
 
-import { createStaticServer } from './createStaticServer'
+const createStaticServer = require('./createStaticServer')
 
 async function crawler ({ url, browser }) {
   let page = null
@@ -37,7 +37,8 @@ async function crawler ({ url, browser }) {
  * @param {Object} routes // Route patterns
  * @param {Promise} getUrls // Urls to render
  */
-export const renderPages = async (routes, getUrls) => {
+const renderPages = async (allPages) => {
+
   const port = 8080
 
   await createStaticServer(port)
@@ -45,10 +46,8 @@ export const renderPages = async (routes, getUrls) => {
   console.log(`Server running at http://localhost:${port}/`)
 
   const baseUrl = `http://localhost:${port}`
-  const staticRoutes = Object.keys(routes).filter(route => !route.includes('/:'))
-  const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
 
-  const allPages = await getUrls(staticRoutes)
+  const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
 
   const crawls = allPages.map(page => crawler({
     url: `${baseUrl}${page}`,
@@ -71,7 +70,7 @@ export const renderPages = async (routes, getUrls) => {
 
     const pageName = pagePath === '/' ? '/index.html' : `${pagePath}/index.html`
 
-    const outputPath = path.join(__dirname, '..', 'dist', pageName)
+    const outputPath = path.join(__dirname, '../../..', 'dist', pageName)
 
     fse.outputFile(outputPath, cleanedUp)
       .then(() => console.log(`Page created: ${outputPath}`))
@@ -84,3 +83,6 @@ export const renderPages = async (routes, getUrls) => {
 
   return true
 }
+
+
+module.exports = renderPages

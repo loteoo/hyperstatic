@@ -2,7 +2,7 @@ var http = require('http')
 var fs = require('fs')
 var path = require('path')
 
-export const createStaticServer = (port) => http.createServer(function (request, response) {
+const createStaticServer = (port) => http.createServer(function (request, response) {
   console.log('request ', request.url)
 
   var filePath = request.url
@@ -10,7 +10,7 @@ export const createStaticServer = (port) => http.createServer(function (request,
     filePath = '/index.html'
   }
 
-  filePath = path.join(__dirname, '..', 'dist', filePath)
+  filePath = path.join(__dirname, '../../..', 'dist', filePath)
 
   if (!filePath.includes('.')) {
     filePath = filePath + '/index.html'
@@ -43,7 +43,9 @@ export const createStaticServer = (port) => http.createServer(function (request,
       // return home page
       var home = path.join(__dirname, '..', 'dist', 'index.html')
       fs.readFile(home, function (error, content) {
-        if (error) throw error
+        if (error) {
+
+        }
         response.writeHead(200, { 'Content-Type': 'text/html' })
         response.end(content, 'utf-8')
       })
@@ -53,3 +55,6 @@ export const createStaticServer = (port) => http.createServer(function (request,
     }
   })
 }).listen(port)
+
+
+module.exports = createStaticServer
