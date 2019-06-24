@@ -2,7 +2,7 @@ var http = require('http')
 var fs = require('fs')
 var path = require('path')
 
-http.createServer(function (request, response) {
+export const createStaticServer = (port) => http.createServer(function (request, response) {
   console.log('request ', request.url)
 
   var filePath = request.url
@@ -52,5 +52,4 @@ http.createServer(function (request, response) {
       response.end(content, 'utf-8')
     }
   })
-}).listen(8080)
-console.log('Server running at http://localhost:8080/')
+}).listen(port)

@@ -2,6 +2,8 @@ import puppeteer from 'puppeteer'
 import fse from 'fs-extra'
 import path from 'path'
 
+import { createStaticServer } from './static-server'
+
 async function crawler ({ url, browser }) {
   let page = null
   let html = false
@@ -36,7 +38,13 @@ async function crawler ({ url, browser }) {
  * @param {Promise} getUrls // Urls to render
  */
 export const renderPages = async (routes, getUrls) => {
-  const baseUrl = 'http://localhost:8080'
+  const port = 8080
+
+  await createStaticServer(port)
+
+  console.log(`Server running at http://localhost:${port}/`)
+
+  const baseUrl = `http://localhost:${port}`
   const staticRoutes = Object.keys(routes).filter(route => !route.includes('/:'))
   const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
 
