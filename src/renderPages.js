@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer'
 import fse from 'fs-extra'
 import path from 'path'
 
-import { createStaticServer } from './static-server'
+import { createStaticServer } from './createStaticServer'
 
 async function crawler ({ url, browser }) {
   let page = null
