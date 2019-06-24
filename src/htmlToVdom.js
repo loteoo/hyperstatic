@@ -5,6 +5,7 @@ import { h } from 'hyperapp'
  * Implemented by gungorkocak
  * https://github.com/gungorkocak
  * (shared on the hyperapp slack)
+ * Someone should make this a package...
  */
 
 const mapProps = attrs => (
