@@ -4,6 +4,8 @@
   "description": "Hyperapp static site framework",
   "author": "Alexandre Lotte",
   "license": "MIT",
+  "main": "src/index.js",
+  "module": "src/index.js",
   "scripts": {
     "test": "echo \"No test specified\""
   },
@@ -13,11 +15,25 @@
     "puppeteer": "^1.17.0",
     "query-string": "^6.7.0",
     "serialize-javascript": "^1.7.0",
-    "url-pattern": "^1.0.3",
+    "url-pattern": "^1.0.3"
+  },
+  "devDependencies": {
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.2",
-    "babel-plugin-jsx-pragmatic": "^1.0.2",
     "parcel-bundler": "^1.12.3",
     "rimraf": "^2.6.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loteoo/hyperapp-site-generator.git"
+  },
+  "keywords": [
+    "hyperapp",
+    "framework",
+    "static-site-generator"
+  ],
+  "bugs": {
+    "url": "https://github.com/loteoo/hyperapp-site-generator/issues"
+  },
+  "homepage": "https://github.com/loteoo/hyperapp-site-generator#readme"
 }
