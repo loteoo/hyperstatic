@@ -42,24 +42,30 @@ export const Navigate = (state, to) => [
 export const TriggerRouteLoad = (state, path) => {
   const routes = Object.keys(state.routes).map(route => state.routes[route])
   const matchedRoute = routes.find(route => route.pattern.match(path))
+  const loaded = matchedRoute && matchedRoute.view
+
   // console.log('TriggerRouteLoad', state)
 
-  return [
-    {
-      ...state,
-      routes: {
-        ...state.routes,
-        [matchedRoute.route]: {
-          ...matchedRoute,
-          loading: true
+  if (matchedRoute && !loaded) {
+    return [
+      {
+        ...state,
+        routes: {
+          ...state.routes,
+          [matchedRoute.route]: {
+            ...matchedRoute,
+            loading: true
+          }
         }
-      }
-    },
-    LoadRoute({
-      path,
-      action: ViewLoaded,
-      route: matchedRoute.route,
-      viewPromise: matchedRoute.viewPromise
-    })
-  ]
+      },
+      LoadRoute({
+        path,
+        action: ViewLoaded,
+        route: matchedRoute.route,
+        viewPromise: matchedRoute.viewPromise
+      })
+    ]
+  }
+
+  return state
 }

@@ -14,7 +14,10 @@ export const LoadRoute = ({ action, route, viewPromise, path }) => [loadRouteFx,
 
 // Change location FX
 const locationFx = (dispatch, { to }) => {
-  history.pushState(null, '', to)
-  dispatchEvent(new CustomEvent('pushstate'))
+  if (to !== window.location.pathname) {
+    window.scrollTo(0, 0)
+    history.pushState(null, '', to)
+    dispatchEvent(new CustomEvent('pushstate'))
+  }
 }
 export const ChangeLocation = ({ to }) => [locationFx, { to }]
