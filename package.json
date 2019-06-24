@@ -14,13 +14,10 @@
     "query-string": "^6.7.0",
     "serialize-javascript": "^1.7.0",
     "url-pattern": "^1.0.3",
-    "autoprefixer": "^9.6.0",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.2",
     "babel-plugin-jsx-pragmatic": "^1.0.2",
-    "marked": "^0.6.2",
     "parcel-bundler": "^1.12.3",
-    "rimraf": "^2.6.3",
-    "workbox-cli": "^4.3.1"
+    "rimraf": "^2.6.3"
   }
 }
