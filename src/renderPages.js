@@ -34,8 +34,7 @@ async function crawler ({ url, browser }) {
 
 /**
  *
- * @param {Object} routes // Route patterns
- * @param {Promise} getUrls // Urls to render
+ * @param {Array} routes // List of URLs to render
  */
 const renderPages = async (allPages) => {
 
