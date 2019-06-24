@@ -5,11 +5,8 @@ import htmlToVdom from './htmlToVdom'
 
 // Router component
 export const Router = state => {
-
-
   // State pre-fetching testing
   // if (window.navigator.userAgent === 'puppeteer') {
-
 
   //   let scriptTag = document.getElementById('initial-state')
 
@@ -32,7 +29,7 @@ export const Router = state => {
 
   if (match.view) {
     // console.log('Used view function')
-    return h('div', {id: 'router-outlet'}, [
+    return h('div', { id: 'router-outlet' }, [
       match.view(state)
     ])
   }
@@ -40,7 +37,7 @@ export const Router = state => {
   const previousOutlet = document.getElementById('router-outlet')
   if (previousOutlet) {
     // console.log('Keeping existing HTML while view loads...')
-    return h('div', {id: 'router-outlet'}, [
+    return h('div', { id: 'router-outlet' }, [
       htmlToVdom(previousOutlet.innerHTML)
     ])
   }
@@ -48,8 +45,3 @@ export const Router = state => {
   // console.log('Loading view...')
   return 'Loading...'
 }
-
-
-
-
-

@@ -1,23 +1,22 @@
-var http = require('http');
-var fs = require('fs');
-var path = require('path');
+var http = require('http')
+var fs = require('fs')
+var path = require('path')
 
 http.createServer(function (request, response) {
+  console.log('request ', request.url)
 
-  console.log('request ', request.url);
-
-  var filePath = request.url;
-  if (filePath == '/') {
-    filePath = '/index.html';
+  var filePath = request.url
+  if (filePath === '/') {
+    filePath = '/index.html'
   }
 
   filePath = path.join(__dirname, '..', 'dist', filePath)
 
-   if (!filePath.includes('.')) {
+  if (!filePath.includes('.')) {
     filePath = filePath + '/index.html'
   }
 
-  var extname = String(path.extname(filePath)).toLowerCase();
+  var extname = String(path.extname(filePath)).toLowerCase()
   var mimeTypes = {
     '.html': 'text/html',
     '.js': 'text/javascript',
@@ -34,27 +33,24 @@ http.createServer(function (request, response) {
     '.otf': 'application/font-otf',
     '.svg': 'application/image/svg+xml',
     '.wasm': 'application/wasm'
-  };
+  }
 
-  var contentType = mimeTypes[extname] || 'application/octet-stream';
+  var contentType = mimeTypes[extname] || 'application/octet-stream'
 
-  fs.readFile(filePath, function(error, content) {
-
+  fs.readFile(filePath, function (error, content) {
     // If 404
     if (error) {
-
       // return home page
-      var home = path.join(__dirname, '..', 'dist', 'index.html');
-      fs.readFile(home, function(error, content) {
-        response.writeHead(200, { 'Content-Type': 'text/html' });
-        response.end(content, 'utf-8');
-      });
-
+      var home = path.join(__dirname, '..', 'dist', 'index.html')
+      fs.readFile(home, function (error, content) {
+        if (error) throw error
+        response.writeHead(200, { 'Content-Type': 'text/html' })
+        response.end(content, 'utf-8')
+      })
     } else {
-      response.writeHead(200, { 'Content-Type': contentType });
-      response.end(content, 'utf-8');
+      response.writeHead(200, { 'Content-Type': contentType })
+      response.end(content, 'utf-8')
     }
-  });
-
-}).listen(8080);
-console.log('Server running at http://localhost:8080/');
+  })
+}).listen(8080)
+console.log('Server running at http://localhost:8080/')

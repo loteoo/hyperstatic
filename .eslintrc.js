@@ -1,7 +1,7 @@
 module.exports = {
-  'parser': 'babel-eslint',
-  'extends': ['standard'],
-  'rules': {
-    'no-unused-vars': [2, { 'varsIgnorePattern': 'h' }]
+  parser: 'babel-eslint',
+  extends: ['standard'],
+  rules: {
+    'no-undef': 0,
   }
 }

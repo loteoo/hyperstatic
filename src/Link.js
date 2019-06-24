@@ -1,10 +1,9 @@
 import { h } from 'hyperapp'
 
-import {Navigate, TriggerRouteLoad} from './actions'
+import { Navigate, TriggerRouteLoad } from './actions'
 
 // Link component
-export const Link = ({to, state, scrollToTop, ...props}, children) => {
-
+export const Link = ({ to, state, scrollToTop, ...props }, children) => {
   const routes = Object.keys(state.routes).map(route => state.routes[route])
   const matchedRoute = routes.find(route => route.pattern.match(to))
   const loaded = matchedRoute && matchedRoute.view
@@ -32,7 +31,6 @@ export const Link = ({to, state, scrollToTop, ...props}, children) => {
           }
           return to
         }
-        return
       }
     ]
   }

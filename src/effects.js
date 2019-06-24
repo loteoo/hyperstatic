@@ -10,21 +10,11 @@ const loadRouteFx = (dispatch, { action, route, viewPromise, path }) =>
     }])
   })
 
-export const LoadRoute = ({action, route, viewPromise, path}) => [loadRouteFx, { action, route, viewPromise, path }]
-
-
-
-
-
-
-
-
+export const LoadRoute = ({ action, route, viewPromise, path }) => [loadRouteFx, { action, route, viewPromise, path }]
 
 // Change location FX
 const locationFx = (dispatch, { to }) => {
   history.pushState(null, '', to)
   dispatchEvent(new CustomEvent('pushstate'))
 }
-export const ChangeLocation = ({to}) => [locationFx, { to }]
-
-
+export const ChangeLocation = ({ to }) => [locationFx, { to }]

@@ -2,36 +2,33 @@ import puppeteer from 'puppeteer'
 import fse from 'fs-extra'
 import path from 'path'
 
-
-
-async function crawler({ url, browser }) {
-  let page = null;
-  let html = false;
+async function crawler ({ url, browser }) {
+  let page = null
+  let html = false
 
   try {
-    page = await browser.newPage();
+    page = await browser.newPage()
 
-    await page.setUserAgent('puppeteer');
+    await page.setUserAgent('puppeteer')
 
-    page.on("pageerror", function(err) {
-      const theTempValue = err.toString();
-      console.log("Page error: " + theTempValue);
+    page.on('pageerror', function (err) {
+      const theTempValue = err.toString()
+      console.log('Page error: ' + theTempValue)
     })
 
-    await page.goto(url, { waitUntil: "networkidle0" });
+    await page.goto(url, { waitUntil: 'networkidle0' })
 
-    html = await page.content();
+    html = await page.content()
   } catch (e) {
-      debug.warn(`Not able to fetch ${url}`);
+    debug.warn(`Not able to fetch ${url}`)
   } finally {
     if (page) {
-      await page.close();
+      await page.close()
     }
-    return html;
+    // eslint-disable-next-line no-unsafe-finally
+    return html
   }
 }
-
-
 
 /**
  *
@@ -39,10 +36,9 @@ async function crawler({ url, browser }) {
  * @param {Promise} getUrls // Urls to render
  */
 export const renderPages = async (routes, getUrls) => {
-
   const baseUrl = 'http://localhost:8080'
   const staticRoutes = Object.keys(routes).filter(route => !route.includes('/:'))
-  const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
+  const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
 
   const allPages = await getUrls(staticRoutes)
 
@@ -56,7 +52,6 @@ export const renderPages = async (routes, getUrls) => {
   const pagesHtml = await Promise.all(crawls)
 
   pagesHtml.forEach((html, i) => {
-
     const pagePath = allPages[i]
 
     if (!html) {
@@ -66,7 +61,7 @@ export const renderPages = async (routes, getUrls) => {
 
     const cleanedUp = html.replace(baseUrl, '')
 
-    const pageName = pagePath == '/' ? '/index.html' : `${pagePath}/index.html`
+    const pageName = pagePath === '/' ? '/index.html' : `${pagePath}/index.html`
 
     const outputPath = path.join(__dirname, '..', 'dist', pageName)
 
@@ -75,8 +70,7 @@ export const renderPages = async (routes, getUrls) => {
       .catch(console.error)
   })
 
-
-  await browser.close();
+  await browser.close()
 
   console.log('Pages saved!')
 

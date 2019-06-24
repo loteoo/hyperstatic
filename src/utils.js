@@ -1,7 +1,6 @@
 import queryString from 'query-string'
 
 export const getPathInfo = (state, path) => {
-
   const parts = path.split('?')
   const pathName = parts[0]
   const query = parts[1]

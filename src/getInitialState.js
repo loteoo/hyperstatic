@@ -1,6 +1,6 @@
 import UrlPattern from 'url-pattern'
 
-import {ParseUrl} from './actions'
+import { ParseUrl } from './actions'
 
 // Build routes object
 const buildRoutesObject = (routes) => Object.keys(routes).reduce((routesObj, route) => ({
@@ -13,10 +13,7 @@ const buildRoutesObject = (routes) => Object.keys(routes).reduce((routesObj, rou
   }
 }), window.initialState ? window.initialState.routes : {})
 
-
-
 export const getInitialState = (routes, extraInit) => {
-
   const init = {
     location: {
       path: '/',
@@ -26,10 +23,8 @@ export const getInitialState = (routes, extraInit) => {
     },
     ...extraInit,
     ...window.initialState,
-    routes: buildRoutesObject(routes),
+    routes: buildRoutesObject(routes)
   }
 
   return ParseUrl(init, window.location.pathname + window.location.search)
-
 }
-

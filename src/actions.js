@@ -1,10 +1,9 @@
-import {LoadRoute, ChangeLocation} from './effects'
+import { LoadRoute, ChangeLocation } from './effects'
 
-import {getPathInfo} from './utils'
+import { getPathInfo } from './utils'
 
 // Sets a value to the given key in the state
 export const ParseUrl = (state, path) => {
-
   const location = getPathInfo(state, path)
 
   // Set location params
@@ -16,9 +15,7 @@ export const ParseUrl = (state, path) => {
   return (location.route && !location.loaded) ? TriggerRouteLoad(next, location.path) : next
 }
 
-
-const ViewLoaded = (state, {route, view, Init, path}) => {
-
+const ViewLoaded = (state, { route, view, Init, path }) => {
   const loaded = {
     ...state,
     routes: {
@@ -36,15 +33,13 @@ const ViewLoaded = (state, {route, view, Init, path}) => {
   return Init ? Init(loaded, location) : loaded
 }
 
-
 // Navigate action
 export const Navigate = (state, to) => [
   state,
-  ChangeLocation({to})
+  ChangeLocation({ to })
 ]
 
 export const TriggerRouteLoad = (state, path) => {
-
   const routes = Object.keys(state.routes).map(route => state.routes[route])
   const matchedRoute = routes.find(route => route.pattern.match(path))
   // console.log('TriggerRouteLoad', state)
