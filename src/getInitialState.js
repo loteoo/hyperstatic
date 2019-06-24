@@ -15,7 +15,7 @@ const buildRoutesObject = (routes) => Object.keys(routes).reduce((routesObj, rou
 
 
 
-const getInitialState = (routes, extraInit) => {
+export const getInitialState = (routes, extraInit) => {
 
   const init = {
     location: {
@@ -33,5 +33,3 @@ const getInitialState = (routes, extraInit) => {
 
 }
 
-
-export default getInitialState
