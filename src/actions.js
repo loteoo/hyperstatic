@@ -39,6 +39,15 @@ export const Navigate = (state, to) => [
   ChangeLocation({ to })
 ]
 
+
+export const TriggerRouteLoadIfGoodConnection = (state, path) => {
+  if (state.goodConnection) {
+    return TriggerRouteLoad(state, path)
+  }
+
+  return state
+}
+
 export const TriggerRouteLoad = (state, path) => {
   const routes = Object.keys(state.routes).map(route => state.routes[route])
   const matchedRoute = routes.find(route => route.pattern.match(path))

@@ -15,6 +15,7 @@ const buildRoutesObject = (routes) => Object.keys(routes).reduce((routesObj, rou
 
 export const getInitialState = (routes, extraInit) => {
   const init = {
+    goodConnection: navigator.connection.downlink > 2, // TODO: use something more reliable, maybe an effect
     location: {
       path: '/',
       params: {},
