@@ -13,7 +13,11 @@ export const Link = ({ to, ...props }, children) => {
           ev.preventDefault()
         }
       ],
-      onmousedown: [Navigate, to],
+      onmousedown: [Navigate, ev => {
+        if (ev.button === 0) {
+          return to
+        }
+      }],
       onmouseover: [TriggerRouteLoad, to],
       oncreate: [TriggerRouteLoadIfGoodConnection, to],
       ...props
