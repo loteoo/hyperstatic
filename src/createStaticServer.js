@@ -41,10 +41,10 @@ const createStaticServer = (port) => http.createServer(function (request, respon
     // If 404
     if (error) {
       // return home page
-      var home = path.join(__dirname, '..', 'dist', 'index.html')
+      var home = path.join(__dirname, '../../..', 'dist', 'index.html')
       fs.readFile(home, function (error, content) {
         if (error) {
-
+          console.log(error)
         }
         response.writeHead(200, { 'Content-Type': 'text/html' })
         response.end(content, 'utf-8')

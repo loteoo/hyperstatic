@@ -42,7 +42,7 @@ const renderPages = async (allPages) => {
 
   await createStaticServer(port)
 
-  console.log(`Server running at http://localhost:${port}/`)
+  console.log(`Server running at http://localhost:${port}`)
 
   const baseUrl = `http://localhost:${port}`
 
