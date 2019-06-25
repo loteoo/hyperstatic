@@ -13,13 +13,11 @@ const buildRoutesObject = (routes) => Object.keys(routes).reduce((routesObj, rou
   }
 }), window.initialState ? window.initialState.routes : {})
 
-
- // TODO: use something more reliable
+// TODO: use something more reliable
 const connSpeed = navigator.connection ? navigator.connection.downlink : 10
 const goodConnection = window.navigator.userAgent === 'puppeteer'
   ? false
   : connSpeed > 2
-
 
 export const getInitialState = (routes, extraInit) => {
   const init = {
@@ -43,7 +41,7 @@ export const getInitialState = (routes, extraInit) => {
         new CustomEvent('triggerrouteload')
       )
     })
-  }, 50);
+  }, 75)
 
   return ParseUrl(init, window.location.pathname + window.location.search)
 }
