@@ -13,9 +13,17 @@ const buildRoutesObject = (routes) => Object.keys(routes).reduce((routesObj, rou
   }
 }), window.initialState ? window.initialState.routes : {})
 
+
+ // TODO: use something more reliable
+const connSpeed = navigator.connection ? navigator.connection.downlink : 10
+const goodConnection = window.navigator.userAgent === 'puppeteer'
+  ? false
+  : connSpeed > 2
+
+
 export const getInitialState = (routes, extraInit) => {
   const init = {
-    goodConnection: navigator.connection.downlink > 2, // TODO: use something more reliable, maybe an effect
+    goodConnection,
     location: {
       path: '/',
       params: {},
