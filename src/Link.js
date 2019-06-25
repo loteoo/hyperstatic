@@ -20,6 +20,7 @@ export const Link = ({ to, ...props }, children) => {
       }],
       onmouseover: [TriggerRouteLoad, to],
       oncreate: [TriggerRouteLoadIfGoodConnection, to],
+      ontriggerrouteload: [TriggerRouteLoadIfGoodConnection, to],
       ...props
     }, children)
   ])

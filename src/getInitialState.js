@@ -35,5 +35,15 @@ export const getInitialState = (routes, extraInit) => {
     routes: buildRoutesObject(routes)
   }
 
+  // TODO: find something better than this... (no oncreate event when re-hydrating)
+  // Use init effect instead
+  setTimeout(() => {
+    document.querySelectorAll('a').forEach(link => {
+      link.dispatchEvent(
+        new CustomEvent('triggerrouteload')
+      )
+    })
+  }, 50);
+
   return ParseUrl(init, window.location.pathname + window.location.search)
 }
