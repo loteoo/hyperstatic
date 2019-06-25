@@ -8,15 +8,9 @@ export const Link = ({ to, ...props }, children) => {
     h('a', {
       href: to,
       onclick: [
-        state => state,
-        ev => {
-          ev.preventDefault()
-        }
-      ],
-      onmousedown: [Navigate, ev => {
-        if (ev.button === 0) {
-          return to
-        }
+        Navigate, ev => {
+        ev.preventDefault()
+        return to
       }],
       onmouseover: [TriggerRouteLoad, to],
       oncreate: [TriggerRouteLoadIfGoodConnection, to],
