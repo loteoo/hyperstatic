@@ -56,5 +56,4 @@ const createStaticServer = (port) => http.createServer(function (request, respon
   })
 }).listen(port)
 
-
 module.exports = createStaticServer

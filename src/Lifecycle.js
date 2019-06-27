@@ -9,19 +9,19 @@ import { h } from 'hyperapp'
  */
 
 const dispatchEvent = (event, target) =>
-  setTimeout(()=> target.dispatchEvent(
+  setTimeout(() => target.dispatchEvent(
     new CustomEvent(event, { detail: target })
   ))
 
 const defineElement = name => {
   customElements.get(name) ||
   customElements.define(name, class extends HTMLElement {
-    appendChild(child){
+    appendChild (child) {
       super.appendChild(child)
       dispatchEvent('create', child)
       return child
     }
-    removeChild(child){
+    removeChild (child) {
       super.removeChild(child)
       dispatchEvent('remove', child)
       return child
@@ -31,4 +31,3 @@ const defineElement = name => {
 
 export const Lifecycle = (props, child) =>
   (defineElement('ha-lifecycle'), h('ha-lifecycle', props, [child]))
-

@@ -39,7 +39,6 @@ export const Navigate = (state, to) => [
   ChangeLocation({ to })
 ]
 
-
 export const TriggerRouteLoadIfGoodConnection = (state, path) => {
   if (state.goodConnection) {
     return TriggerRouteLoad(state, path)
