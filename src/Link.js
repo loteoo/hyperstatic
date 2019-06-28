@@ -11,8 +11,7 @@ export const Link = ({ to, ...props }, children) => {
         Navigate, ev => {
           ev.preventDefault()
           return to
-        }
-      ],
+        }],
       onmouseover: [TriggerRouteLoad, to],
       oncreate: [TriggerRouteLoadIfGoodConnection, to],
       ontriggerrouteload: [TriggerRouteLoadIfGoodConnection, to],

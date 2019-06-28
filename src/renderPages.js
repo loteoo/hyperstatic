@@ -41,8 +41,6 @@ const renderPages = async (allPages) => {
 
   await createStaticServer(port)
 
-  console.log(`Server running at http://localhost:${port}`)
-
   const baseUrl = `http://localhost:${port}`
 
   const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
@@ -68,7 +66,7 @@ const renderPages = async (allPages) => {
 
     const pageName = pagePath === '/' ? '/index.html' : `${pagePath}/index.html`
 
-    const outputPath = path.join(__dirname, '../../..', 'dist', pageName)
+    const outputPath = path.join(__dirname, '../../../dist', pageName)
 
     fse.outputFile(outputPath, cleanedUp)
       .then(() => console.log(`Page created: ${outputPath}`))
