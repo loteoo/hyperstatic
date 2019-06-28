@@ -54,12 +54,15 @@ const renderPages = async (allPages) => {
 
   const pagesHtml = await Promise.all(crawls)
 
-  pagesHtml.forEach((html, i) => {
+  for (let i = 0; i < pagesHtml.length; i++) {
+
+    const html = pagesHtml[i]
     const pagePath = allPages[i]
+
 
     if (!html) {
       console.log('Empty page: ' + pagePath)
-      return
+      continue;
     }
 
     const cleanedUp = html.replace(baseUrl, '')
@@ -68,10 +71,19 @@ const renderPages = async (allPages) => {
 
     const outputPath = path.join(__dirname, '../../../dist', pageName)
 
-    fse.outputFile(outputPath, cleanedUp)
-      .then(() => console.log(`Page created: ${outputPath}`))
-      .catch(console.error)
-  })
+
+    console.log(`Creating page at: ${outputPath} ...`)
+
+    try {
+      await fse.outputFile(outputPath, cleanedUp)
+
+      console.log(`Page created: ${outputPath}`)
+
+    } catch (err) {
+      console.error(err)
+    }
+
+  }
 
   await browser.close()
 
