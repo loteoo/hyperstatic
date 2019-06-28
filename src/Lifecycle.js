@@ -29,5 +29,5 @@ const defineElement = name => {
   })
 }
 
-export const Lifecycle = (props, child) =>
-  (defineElement('ha-lifecycle'), h('ha-lifecycle', props, [child]))
+// eslint-disable-next-line no-sequences
+export const Lifecycle = (props, child) => (defineElement('ha-lifecycle'), h('ha-lifecycle', props, [child]))
