@@ -28,7 +28,7 @@ export const hyperstatic = ({ routes, init: userInit, view, subscriptions: userS
 
     // Add a subscription to the sub array
     subscriptions: (state) => {
-      const subs = userSubs(state)
+      const subs = userSubs ? userSubs(state) : []
 
       return subs.concat([
         LocationChanged({ action: ParseUrl })

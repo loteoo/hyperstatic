@@ -16,12 +16,11 @@ export const ParseUrl = (state, path) => {
 }
 
 const BundleLoaded = (state, { path, bundle }) => {
-
   const routes = Object.keys(state.routes).map(route => state.routes[route])
   const matchedRoute = routes.find(route => route.pattern.match(path))
 
   if (path === '/counter') {
-    console.log(bundle);
+    console.log(bundle)
   }
 
   const withBundleLoaded = {
@@ -36,7 +35,6 @@ const BundleLoaded = (state, { path, bundle }) => {
       }
     }
   }
-
 
   if (bundle.Init) {
     const pathInfo = getPathInfo(withBundleLoaded, path)
@@ -76,7 +74,6 @@ export const TriggerPageLoad = (state, path) => {
 
   const pageData = state.pageData[path]
 
-
   // console.log('TriggerPageLoad', state)
 
   if (matchedRoute && !matchedRoute.view && !matchedRoute.loading) {
@@ -99,7 +96,6 @@ export const TriggerPageLoad = (state, path) => {
     ]
   }
 
-
   if (matchedRoute && matchedRoute.view && !pageData && matchedRoute.initAction) {
     return matchedRoute.initAction({
       ...state,
@@ -114,5 +110,4 @@ export const TriggerPageLoad = (state, path) => {
   }
 
   return state
-
 }
