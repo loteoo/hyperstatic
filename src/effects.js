@@ -1,21 +1,19 @@
 
-// Load route FX
-const loadRouteFx = (dispatch, { action, route, viewPromise, path }) =>
-  viewPromise.then(importedModule => {
-    dispatch([action, {
+// Load bundle FX
+const loadBundleFx = (dispatch, { action, bundlePromise, path }) =>
+  bundlePromise.then(importedModule => {
+    dispatch(action, {
       path,
-      route,
-      view: importedModule.default,
-      Init: importedModule.Init
-    }])
+      bundle: importedModule
+    })
   })
 
-export const LoadRoute = ({ action, route, viewPromise, path }) => [loadRouteFx, { action, route, viewPromise, path }]
+export const LoadBundle = ({ action, bundlePromise, path }) => [loadBundleFx, { action, bundlePromise, path }]
 
 // Change location FX
 const locationFx = (dispatch, { to }) => {
   if (to !== window.location.pathname) {
-    window.scrollTo(0, 0)
+    // window.scrollTo(0, 0)
     history.pushState(null, '', to)
     dispatchEvent(new CustomEvent('pushstate'))
   }
