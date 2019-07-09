@@ -4,8 +4,7 @@ import { Navigate, TriggerPageLoad, TriggerPageLoadIfGoodConnection } from './ac
 
 // Link component
 export const Link = ({ to, ...props }, children) => {
-  return Lifecycle({}, [
-    h('a', {
+  return Lifecycle('a', {
       href: to,
       onclick: [
         Navigate, ev => {
@@ -17,5 +16,4 @@ export const Link = ({ to, ...props }, children) => {
       ontriggerpageload: [TriggerPageLoadIfGoodConnection, to],
       ...props
     }, children)
-  ])
 }

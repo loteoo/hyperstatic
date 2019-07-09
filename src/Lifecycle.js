@@ -7,14 +7,19 @@ import { h } from 'hyperapp'
  *
  */
 
-export const Lifecycle = (props, child) => {
+export const Lifecycle = (elementName, props, children) => {
   const fn = (method, eventName) => function (el) {
     const event = new CustomEvent(eventName, { detail: el })
     setTimeout(() => el.dispatchEvent(event))
     return Object.getPrototypeOf(this)[method].call(this, el)
   }
-  return h('div', {
-    appendChild: fn('appendChild', 'create'),
-    removeChild: fn('removeChild', 'remove')
-  }, [child])
+  return h(
+    elementName,
+    {
+      appendChild: fn('appendChild', 'create'),
+      removeChild: fn('removeChild', 'remove'),
+      ...props
+    },
+    children
+  )
 }
