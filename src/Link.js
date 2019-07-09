@@ -1,6 +1,6 @@
 import { h } from 'hyperapp'
 import { Lifecycle } from './Lifecycle'
-import { Navigate, TriggerRouteLoad, TriggerRouteLoadIfGoodConnection } from './actions'
+import { Navigate, TriggerPageLoad, TriggerPageLoadIfGoodConnection } from './actions'
 
 // Link component
 export const Link = ({ to, ...props }, children) => {
@@ -12,9 +12,9 @@ export const Link = ({ to, ...props }, children) => {
           ev.preventDefault()
           return to
         }],
-      onmouseover: [TriggerRouteLoad, to],
-      oncreate: [TriggerRouteLoadIfGoodConnection, to],
-      ontriggerrouteload: [TriggerRouteLoadIfGoodConnection, to],
+      onmouseover: [TriggerPageLoad, to],
+      oncreate: [TriggerPageLoadIfGoodConnection, to],
+      ontriggerpageload: [TriggerPageLoadIfGoodConnection, to],
       ...props
     }, children)
   ])

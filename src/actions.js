@@ -1,36 +1,57 @@
-import { LoadRoute, ChangeLocation } from './effects'
+import { LoadBundle, ChangeLocation } from './effects'
 
 import { getPathInfo } from './utils'
 
 // Sets a value to the given key in the state
 export const ParseUrl = (state, path) => {
-  const location = getPathInfo(state, path)
+  const pathInfo = getPathInfo(state, path)
 
   // Set location params
   const next = {
     ...state,
-    location
+    location: pathInfo
   }
 
-  return (location.route && !location.loaded) ? TriggerRouteLoad(next, location.path) : next
+  return (pathInfo.route && !pathInfo.loaded) ? TriggerPageLoad(next, pathInfo.path) : next
 }
 
-const ViewLoaded = (state, { route, view, Init, path }) => {
-  const loaded = {
+const BundleLoaded = (state, { path, bundle }) => {
+  const routes = Object.keys(state.routes).map(route => state.routes[route])
+  const matchedRoute = routes.find(route => route.pattern.match(path))
+
+  if (path === '/counter') {
+    console.log(bundle)
+  }
+
+  const withBundleLoaded = {
     ...state,
     routes: {
       ...state.routes,
-      [route]: {
-        ...state.routes[route],
-        view,
+      [matchedRoute.route]: {
+        ...matchedRoute,
+        view: bundle.default,
+        initAction: bundle.Init,
         loading: false
       }
     }
   }
 
-  const location = getPathInfo(loaded, path)
+  if (bundle.Init) {
+    const pathInfo = getPathInfo(withBundleLoaded, path)
+    const withPageInitiated = {
+      ...withBundleLoaded,
+      pageData: {
+        ...withBundleLoaded.pageData,
+        [path]: {
+          ...withBundleLoaded.pageData[path],
+          initiated: true
+        }
+      }
+    }
+    return bundle.Init(withPageInitiated, pathInfo)
+  }
 
-  return Init ? Init(loaded, location) : loaded
+  return withBundleLoaded
 }
 
 // Navigate action
@@ -39,22 +60,23 @@ export const Navigate = (state, to) => [
   ChangeLocation({ to })
 ]
 
-export const TriggerRouteLoadIfGoodConnection = (state, path) => {
+export const TriggerPageLoadIfGoodConnection = (state, path) => {
   if (state.goodConnection) {
-    return TriggerRouteLoad(state, path)
+    return TriggerPageLoad(state, path)
   }
 
   return state
 }
 
-export const TriggerRouteLoad = (state, path) => {
+export const TriggerPageLoad = (state, path) => {
   const routes = Object.keys(state.routes).map(route => state.routes[route])
   const matchedRoute = routes.find(route => route.pattern.match(path))
-  const loaded = matchedRoute && matchedRoute.view
 
-  // console.log('TriggerRouteLoad', state)
+  const pageData = state.pageData[path]
 
-  if (matchedRoute && !loaded) {
+  // console.log('TriggerPageLoad', state)
+
+  if (matchedRoute && !matchedRoute.view && !matchedRoute.loading) {
     return [
       {
         ...state,
@@ -66,13 +88,25 @@ export const TriggerRouteLoad = (state, path) => {
           }
         }
       },
-      LoadRoute({
+      LoadBundle({
         path,
-        action: ViewLoaded,
-        route: matchedRoute.route,
-        viewPromise: matchedRoute.viewPromise
+        action: BundleLoaded,
+        bundlePromise: matchedRoute.bundlePromise
       })
     ]
+  }
+
+  if (matchedRoute && matchedRoute.view && !pageData && matchedRoute.initAction) {
+    return matchedRoute.initAction({
+      ...state,
+      pageData: {
+        ...state.pageData,
+        [path]: {
+          ...pageData,
+          initiated: true
+        }
+      }
+    })
   }
 
   return state

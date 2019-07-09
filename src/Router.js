@@ -21,17 +21,27 @@ export const Router = state => {
   //   `
   // }
 
-  const match = state.routes[state.location.route]
+  const matchedRoute = state.routes[state.location.route]
 
-  if (!match) {
+  if (!matchedRoute) {
     return '404'
   }
 
-  if (match.view) {
-    // console.log('Used view function')
-    return h('div', { id: 'router-outlet' }, [
-      match.view(state)
-    ])
+
+  const pageData = state.pageData[state.location.path]
+
+  if (matchedRoute.view) {
+    if (!matchedRoute.initAction) {
+      return h('div', { id: 'router-outlet' }, [
+        matchedRoute.view(state)
+      ])
+    } else {
+      if (pageData && pageData.initiated) {
+        return h('div', { id: 'router-outlet' }, [
+          matchedRoute.view(state)
+        ])
+      }
+    }
   }
 
   const previousOutlet = document.getElementById('router-outlet')
