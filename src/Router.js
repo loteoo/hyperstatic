@@ -1,7 +1,7 @@
 import { h } from 'hyperapp'
 
 // import serialize from 'serialize-javascript'
-import htmlToVdom from './htmlToVdom'
+import { htmlToVdom } from './htmlToVdom'
 
 // Router component
 export const Router = state => {
@@ -26,7 +26,6 @@ export const Router = state => {
   if (!matchedRoute) {
     return '404'
   }
-
 
   const pageData = state.pageData[state.location.path]
 

@@ -38,9 +38,8 @@ const mapVNode = (node) => {
   }
 }
 
-export default (html) => {
+export const htmlToVdom = (html) => {
   const parser = new DOMParser()
-  const doc = parser.parseFromString(`<div>${html}</div>`, 'text/html')
-  const node = doc.body.firstChild
-  return mapVNode(node)
+  const doc = parser.parseFromString(html, 'text/html')
+  return mapVNode(doc.body)
 }
