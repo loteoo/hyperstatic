@@ -19,10 +19,6 @@ const BundleLoaded = (state, { path, bundle }) => {
   const routes = Object.keys(state.routes).map(route => state.routes[route])
   const matchedRoute = routes.find(route => route.pattern.match(path))
 
-  if (path === '/counter') {
-    console.log(bundle)
-  }
-
   const withBundleLoaded = {
     ...state,
     routes: {
