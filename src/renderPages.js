@@ -14,7 +14,7 @@ async function crawler ({ url, browser }) {
     await page.setUserAgent('puppeteer')
 
     page.on('pageerror', function (err) {
-      console.log(`Runtime error in page: ${url}. Error: ${err.toString()}`)
+      console.log(`Runtime error in page: ${url} Error: ${err.toString()}`)
     })
 
     await page.goto(url, { waitUntil: 'networkidle0' })

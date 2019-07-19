@@ -6,7 +6,9 @@ const createStaticServer = (port) => {
   console.log(`Running static server on http://localhost:${port}`)
 
   return http.createServer((request, response) => {
-    let reqPath = request.url
+    // Get req path without query string
+    let reqPath = request.url.split('?')[0]
+
     if (reqPath === '/') {
       reqPath = '/index.html'
     }
