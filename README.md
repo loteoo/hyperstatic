@@ -29,7 +29,7 @@ To easiest way to get started is to use this [starter template](https://github.c
 
 
 4. Link to your pages using the `<Link>` component.   
-[Example](https://github.com/loteoo/hyperstatic-starter/blob/master/src/app/view.jsx#L15)
+[Example](https://github.com/loteoo/hyperstatic-starter/blob/master/src/app/view.jsx#L7)
 
 5. (Optional) For pre-rendering, create a `render-pages.js`, list your URLs and call `renderPages` with them.   
 [Example](https://github.com/loteoo/hyperstatic-starter/blob/master/render-pages.js)
