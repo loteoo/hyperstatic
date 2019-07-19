@@ -44,3 +44,6 @@ Then add this helper command in your package.json scripts:
 
 
 #### That should be it!
+
+
+Pull requests are welcome!
