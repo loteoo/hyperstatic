@@ -14,8 +14,7 @@ async function crawler ({ url, browser }) {
     await page.setUserAgent('puppeteer')
 
     page.on('pageerror', function (err) {
-      const theTempValue = err.toString()
-      console.log('Page error: ' + theTempValue)
+      console.log(`Runtime error in page: ${url}. Error: ${err.toString()}`)
     })
 
     await page.goto(url, { waitUntil: 'networkidle0' })
@@ -37,7 +36,7 @@ async function crawler ({ url, browser }) {
  * @param {Array} routes // List of URLs to render
  */
 const renderPages = async (allPages) => {
-  const port = 9677
+  const port = 8080
 
   await createStaticServer(port)
 
@@ -45,36 +44,36 @@ const renderPages = async (allPages) => {
 
   const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
 
-  const crawls = allPages.map(page => crawler({
-    url: `${baseUrl}${page}`,
-    browser
-  }))
+  console.log(`Rendering ${allPages.length} pages...`)
 
-  console.log(`Rendering ${crawls.length} pages...`)
-
-  const pagesHtml = await Promise.all(crawls)
-
-  for (let i = 0; i < pagesHtml.length; i++) {
-    const html = pagesHtml[i]
+  for (let i = 0; i < allPages.length; i++) {
     const pagePath = allPages[i]
 
-    if (!html) {
+    // Render HTML
+    const pageHtml = await crawler({
+      url: `${baseUrl}${pagePath}`,
+      browser
+    })
+
+    // Invalid pages return empty strings as HTML. Do not save those.
+    if (!pageHtml) {
       console.log('Empty page: ' + pagePath)
       continue
     }
 
-    const cleanedUp = html.replace(baseUrl, '')
+    // Convert URI path to absolute disk path in the output dir
+    const pageFilePath = pagePath === '/' ? '/index.html' : `${pagePath}/index.html`
+    const pageFileAbsolutePath = path.join(__dirname, '../../../dist', pageFilePath)
 
-    const pageName = pagePath === '/' ? '/index.html' : `${pagePath}/index.html`
+    // Remove basepath from rendered HTML
+    // Ex: <script src="http://localhost/about" /> becomes just <script src="/about" />
+    const cleanedUpHtml = pageHtml.replace(baseUrl, '')
 
-    const outputPath = path.join(__dirname, '../../../dist', pageName)
-
-    console.log(`Creating page at: ${outputPath} ...`)
-
+    console.log(`Creating page at: ${pageFileAbsolutePath} ...`)
     try {
-      await fse.outputFile(outputPath, cleanedUp)
+      await fse.outputFile(pageFileAbsolutePath, cleanedUpHtml)
 
-      console.log(`Page created: ${outputPath}`)
+      console.log(`Page created: ${pageFileAbsolutePath}`)
     } catch (err) {
       console.error(err)
     }
