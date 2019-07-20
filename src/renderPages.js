@@ -47,6 +47,8 @@ const renderPages = async (allPages, port = 54321) => {
   for (let i = 0; i < allPages.length; i++) {
     const pagePath = allPages[i]
 
+    console.log(`Creating page: ${pagePath} ...`)
+
     // Render HTML
     const pageHtml = await crawler({
       url: `${baseUrl}${pagePath}`,
@@ -67,7 +69,6 @@ const renderPages = async (allPages, port = 54321) => {
     // Ex: <script src="http://localhost/about" /> becomes just <script src="/about" />
     const cleanedUpHtml = pageHtml.replace(baseUrl, '')
 
-    console.log(`Creating page at: ${pageFileAbsolutePath} ...`)
     try {
       await fse.outputFile(pageFileAbsolutePath, cleanedUpHtml)
 
