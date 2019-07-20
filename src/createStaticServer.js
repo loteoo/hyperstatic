@@ -9,21 +9,14 @@ const createStaticServer = (port) => {
     // Get req path without query string
     let reqPath = request.url.split('?')[0]
     // console.log('req: ' + reqPath)
-    if (reqPath === '/') {
+
+    // If request is a page
+    if (!reqPath.includes('.')) {
+      // Use root index page
       reqPath = '/index.html'
     }
 
-    if (!reqPath.includes('.')) {
-      reqPath = reqPath + '/index.html'
-    }
-
-    let filePath = path.join(__dirname, '../../../dist', reqPath)
-
-    // If not a file and not exist, use root index page
-    if (!reqPath.includes('.') && !fs.existsSync(filePath)) {
-      // console.log('Page does not exist. Returning home: ' + filePath)
-      filePath = path.join(__dirname, '../../../dist', '/index.html')
-    }
+    const filePath = path.join(__dirname, '../../../dist', reqPath)
 
     const extname = String(path.extname(filePath)).toLowerCase()
     const mimeTypes = {
@@ -48,8 +41,6 @@ const createStaticServer = (port) => {
 
     fs.readFile(filePath, (error, content) => {
       if (error) {
-        console.log('File not found. Error: ')
-        console.log(error)
         response.writeHead(404, { 'Content-Type': 'text/plain' })
         response.write('404 Not found')
       } else {
