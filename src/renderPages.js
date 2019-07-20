@@ -35,9 +35,7 @@ async function crawler ({ url, browser }) {
  *
  * @param {Array} routes // List of URLs to render
  */
-const renderPages = async (allPages) => {
-  const port = 8080
-
+const renderPages = async (allPages, port = 54321) => {
   await createStaticServer(port)
 
   const baseUrl = `http://localhost:${port}`
