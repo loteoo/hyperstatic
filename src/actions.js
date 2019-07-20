@@ -2,17 +2,18 @@ import { LoadBundle, ChangeLocation } from './effects'
 
 import { getPathInfo } from './utils'
 
-// Sets a value to the given key in the state
 export const ParseUrl = (state, path) => {
-  const pathInfo = getPathInfo(state, path)
-
   // Set location params
+  const pathInfo = getPathInfo(state, path)
   const next = {
     ...state,
     location: pathInfo
   }
 
-  return (pathInfo.route && !pathInfo.loaded) ? TriggerPageLoad(next, pathInfo.path) : next
+  // If route exists and isn't loaded, load it
+  return (pathInfo.route && !pathInfo.loaded)
+    ? TriggerPageLoad(next, pathInfo.path)
+    : next
 }
 
 const BundleLoaded = (state, { path, bundle }) => {
@@ -33,8 +34,7 @@ const BundleLoaded = (state, { path, bundle }) => {
   }
 
   if (bundle.Init) {
-    const pathInfo = getPathInfo(withBundleLoaded, path)
-    const withPageInitiated = {
+    const markedAsInitiated = {
       ...withBundleLoaded,
       pageData: {
         ...withBundleLoaded.pageData,
@@ -44,7 +44,11 @@ const BundleLoaded = (state, { path, bundle }) => {
         }
       }
     }
-    return bundle.Init(withPageInitiated, pathInfo)
+
+    return bundle.Init(
+      markedAsInitiated,
+      getPathInfo(withBundleLoaded, path)
+    )
   }
 
   return withBundleLoaded
@@ -69,8 +73,6 @@ export const TriggerPageLoad = (state, path) => {
   const matchedRoute = routes.find(route => route.pattern.match(path))
 
   const pageData = state.pageData[path]
-
-  // console.log('TriggerPageLoad', state)
 
   if (matchedRoute && !matchedRoute.view && !matchedRoute.loading) {
     return [
