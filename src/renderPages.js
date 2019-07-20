@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer')
 const fse = require('fs-extra')
 const path = require('path')
-const slugify = require('slugify')
+const crypto = require('crypto')
 const replace = require('replace-in-file')
 
 const createStaticServer = require('./createStaticServer')
@@ -93,7 +93,7 @@ const renderPages = async (allPages, port = 54321) => {
 
   for (let i = 0; i < fetchUrls.length; i++) {
     const url = fetchUrls[i]
-    const fileName = slugify(url) + '.json'
+    const fileName = crypto.createHash('md5').update(url).digest('hex') + '.json'
     const filePath = '/data/' + fileName
 
     newFetchUrls.push(filePath)
@@ -115,7 +115,12 @@ const renderPages = async (allPages, port = 54321) => {
       to: newFetchUrls,
       countMatches: true
     })
-    console.log('Update results:' + results)
+    console.log('Bundles updated! Results: ')
+    results.forEach(result => {
+      if (result.hasChanged) {
+        console.log(result)
+      }
+    })
   } catch (error) {
     console.error('Error occurred:', error)
   }

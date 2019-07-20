@@ -1,5 +1,5 @@
 {
-  "version": "0.1.9",
+  "version": "0.2.0-beta",
   "name": "hyperstatic",
   "description": "Hyperapp static site framework",
   "author": "Alexandre Lotte",
@@ -16,7 +16,6 @@
     "query-string": "^6.8.1",
     "replace-in-file": "^4.1.1",
     "serialize-javascript": "^1.7.0",
-    "slugify": "^1.3.4",
     "url-pattern": "^1.0.3"
   },
   "devDependencies": {
