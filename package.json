@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0-beta",
+  "version": "0.2.2-beta",
   "name": "hyperstatic",
   "description": "Hyperapp static site framework",
   "author": "Alexandre Lotte",
