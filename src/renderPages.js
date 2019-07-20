@@ -3,32 +3,13 @@ const fse = require('fs-extra')
 const path = require('path')
 const crypto = require('crypto')
 const replace = require('replace-in-file')
-
 const createStaticServer = require('./createStaticServer')
-
-async function crawler ({ url, browser }) {
-  const page = await browser.newPage()
-
-  await page.setUserAgent('puppeteer')
-
-  page.on('pageerror', function (err) {
-    console.log(`Runtime error in page: ${url} Error: ${err.toString()}`)
-  })
-
-  await page.goto(url, { waitUntil: 'networkidle0' })
-
-  const staticData = await page.evaluate(() => window.staticData)
-
-  const html = await page.content()
-
-  await page.close()
-
-  return { html, staticData }
-}
+const renderer = require('./renderer')
 
 /**
  *
  * @param {Array} routes // List of URLs to render
+ * @param {int} port // port number for the rendering script to use
  */
 const renderPages = async (allPages, port = 54321) => {
   let allStaticData = {}
@@ -47,7 +28,7 @@ const renderPages = async (allPages, port = 54321) => {
     console.log(`Creating page: ${pagePath} ...`)
 
     // Render HTML
-    const { html, staticData } = await crawler({
+    const { html, staticData } = await renderer({
       url: `${baseUrl}${pagePath}`,
       browser
     })
