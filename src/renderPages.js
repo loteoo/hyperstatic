@@ -74,6 +74,7 @@ const renderPages = async (allPages, port = 54321) => {
 
   for (let i = 0; i < fetchUrls.length; i++) {
     const url = fetchUrls[i]
+    const data = allStaticData[url]
     const fileName = crypto.createHash('md5').update(url).digest('hex') + '.json'
     const filePath = '/data/' + fileName
 
@@ -81,7 +82,7 @@ const renderPages = async (allPages, port = 54321) => {
 
     try {
       const dataAbsolutePath = path.join(__dirname, '../../../dist', filePath)
-      await fse.outputFile(dataAbsolutePath, cleanedUpHtml)
+      await fse.outputFile(dataAbsolutePath, JSON.stringify(data))
       console.log(`Data saved: ${dataAbsolutePath}`)
     } catch (err) {
       console.error(err)
