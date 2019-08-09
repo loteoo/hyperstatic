@@ -4,7 +4,7 @@ Hyperstatic is a Hyperapp based static site generator with a code-splitting and 
 
 It's codebase also has an inherently smaller footprint by using Puppeteer for pre-rendering and Parcel for code-splitting.
 
-See the demo site here: https://hyperstatic-demo.netlify.com/
+See the demo site here: https://hyperstatic.dev/
 
 
 
