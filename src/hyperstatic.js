@@ -1,5 +1,5 @@
 import { app } from 'hyperapp'
-import { LocationChanged } from './subscriptions'
+import { PopState } from './subscriptions'
 import { ParseUrl } from './actions'
 import { buildRoutesObject } from './buildRoutesObject'
 
@@ -31,7 +31,7 @@ export const hyperstatic = ({ routes, init: userInit, view, subscriptions: userS
       const subs = userSubs ? userSubs(state) : []
 
       return subs.concat([
-        LocationChanged({ action: ParseUrl })
+        PopState({ action: ParseUrl })
       ])
     },
     node
