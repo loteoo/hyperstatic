@@ -11,11 +11,7 @@ const loadBundleFx = (dispatch, { action, bundlePromise, path }) =>
 export const LoadBundle = ({ action, bundlePromise, path }) => [loadBundleFx, { action, bundlePromise, path }]
 
 // Change location FX
-const locationFx = (dispatch, { to }) => {
-  if (to !== window.location.pathname) {
-    // window.scrollTo(0, 0)
-    history.pushState(null, '', to)
-    dispatchEvent(new CustomEvent('pushstate'))
-  }
+const historyFx = (dispatch, { to }) => {
+  history.pushState(null, '', to)
 }
-export const ChangeLocation = ({ to }) => [locationFx, { to }]
+export const UpdateHistory = ({ to }) => [historyFx, { to }]

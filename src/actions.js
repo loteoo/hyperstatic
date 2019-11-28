@@ -1,4 +1,4 @@
-import { LoadBundle, ChangeLocation } from './effects'
+import { LoadBundle, UpdateHistory } from './effects'
 
 import { getPathInfo } from './utils'
 
@@ -55,10 +55,9 @@ const BundleLoaded = (state, { path, bundle }) => {
 }
 
 // Navigate action
-export const Navigate = (state, to) => [
-  state,
-  ChangeLocation({ to })
-]
+export const Navigate = (state, to) => window.location.pathname === to
+  ? state
+  : [ParseUrl(state, to), UpdateHistory({ to })]
 
 export const TriggerPageLoadIfGoodConnection = (state, path) => {
   if (state.goodConnection) {
