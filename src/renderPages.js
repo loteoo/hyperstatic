@@ -3,8 +3,8 @@ const fse = require('fs-extra')
 const path = require('path')
 const crypto = require('crypto')
 const replace = require('replace-in-file')
-const createStaticServer = require('./createStaticServer')
 const renderer = require('./renderer')
+const createStaticServer = require('./createStaticServer')
 
 /**
  *
@@ -14,7 +14,9 @@ const renderer = require('./renderer')
 const renderPages = async (allPages, port = 54321) => {
   let allStaticData = {}
 
-  await createStaticServer(port)
+  const buildPath = process.cwd() + '/dist'
+
+  await createStaticServer(port, buildPath)
 
   const baseUrl = `http://localhost:${port}`
 
@@ -47,7 +49,7 @@ const renderPages = async (allPages, port = 54321) => {
 
     // Convert URI path to absolute disk path in the output dir
     const pageFilePath = pagePath === '/' ? '/index.html' : `${pagePath}/index.html`
-    const pageFileAbsolutePath = path.join(__dirname, '../../../dist', pageFilePath)
+    const pageFileAbsolutePath = path.join(buildPath, pageFilePath)
 
     // Remove basepath from rendered HTML
     // Ex: <script src="http://localhost/about" /> becomes just <script src="/about" />
@@ -81,7 +83,7 @@ const renderPages = async (allPages, port = 54321) => {
     newFetchUrls.push(filePath)
 
     try {
-      const dataAbsolutePath = path.join(__dirname, '../../../dist', filePath)
+      const dataAbsolutePath = path.join(buildPath, filePath)
       await fse.outputFile(dataAbsolutePath, JSON.stringify(data))
       console.log(`Data saved: ${dataAbsolutePath}`)
     } catch (err) {
@@ -92,7 +94,7 @@ const renderPages = async (allPages, port = 54321) => {
   console.log('Updating bundles...')
   try {
     const results = await replace({
-      files: path.join(__dirname, '../../../dist/*.{js,jsx}'),
+      files: buildPath + '/*.{js,jsx}',
       from: fetchUrls,
       to: newFetchUrls,
       countMatches: true
