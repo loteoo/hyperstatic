@@ -17,8 +17,7 @@ export const ParseUrl = (state, path) => {
 }
 
 const BundleLoaded = (state, { path, bundle }) => {
-  const routes = Object.keys(state.routes).map(route => state.routes[route])
-  const matchedRoute = routes.find(route => route.pattern.match(path))
+  const matchedRoute = Object.values(state.routes).find(route => route.pattern.match(path))
 
   const withBundleLoaded = {
     ...state,
@@ -68,8 +67,7 @@ export const TriggerPageLoadIfGoodConnection = (state, path) => {
 }
 
 export const TriggerPageLoad = (state, path) => {
-  const routes = Object.keys(state.routes).map(route => state.routes[route])
-  const matchedRoute = routes.find(route => route.pattern.match(path))
+  const matchedRoute = Object.values(state.routes).find(route => route.pattern.match(path))
 
   const pageData = state.pageData[path]
 
