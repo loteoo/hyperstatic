@@ -4,8 +4,7 @@ export const getPathInfo = (state, path) => {
 
   // Ignore trailing slashes EXPEPT for home page
   const withoutTrailingSlash = pathname !== '/' ? pathname.replace(/\/$/, '') : pathname
-  const routes = Object.keys(state.routes).map(route => state.routes[route])
-  const matchedRoute = routes.find(route => route.pattern.match(withoutTrailingSlash))
+  const matchedRoute = Object.values(state.routes).find(route => route.pattern.match(withoutTrailingSlash))
   const matchParams = matchedRoute && matchedRoute.pattern.match(withoutTrailingSlash)
   const loaded = matchedRoute && matchedRoute.view
 
