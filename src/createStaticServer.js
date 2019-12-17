@@ -5,7 +5,10 @@ const createStaticServer = (port, buildPath) => http.createServer((request, resp
   // You pass two more arguments for config and middleware
   // More details here: https://github.com/zeit/serve-handler#options
   return handler(request, response, {
-    public: buildPath
+    public: buildPath,
+    rewrites: [
+      { source: '**/*', 'destination': '/index.html' }
+    ]
   })
 }).listen(port)
 
