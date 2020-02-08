@@ -4,7 +4,7 @@
   "description": "Hyperapp static site framework",
   "author": "Alexandre Lotte",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "module": "src/index.js",
   "scripts": {
     "build": "parcel build ./src/index.js",
