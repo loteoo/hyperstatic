@@ -20,7 +20,10 @@ const renderPages = async (allPages, port = 54321) => {
 
   const baseUrl = `http://localhost:${port}`
 
-  const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
+  const browser = await puppeteer.launch({
+    ignoreDefaultArgs: ['--disable-extensions'],
+    args: ['--no-sandbox', '--single-process']
+  })
 
   console.log(`Rendering ${allPages.length} pages...`)
 
