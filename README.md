@@ -47,3 +47,8 @@ Then add this helper command in your package.json scripts:
 
 
 Pull requests are welcome!
+
+
+#### Roadmap / planned changes
+- Once an official hyperapp router is available, build on top of it
+- Add "hooks" for animating page transitions (run effects before / after navigating)
