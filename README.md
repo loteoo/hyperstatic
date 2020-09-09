@@ -49,6 +49,7 @@ Then add this helper command in your package.json scripts:
 Pull requests are welcome!
 
 
-#### Roadmap / planned changes
-- Once an official hyperapp router is available, build on top of it
-- Add "hooks" for animating page transitions (run effects before / after navigating)
+## Roadmap / planned changes
+- Once an official hyperapp router is available, use it internally and build on top of it.
+- Add "hooks" for animating page transitions (run effects before / after navigating).
+- Move away from pupeteer. Do SSR straight from node.js. New APIs will be available to fetch data at build time, similar to Next.js
