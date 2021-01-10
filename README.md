@@ -1,5 +1,7 @@
 # Hyperstatic
 
+## ℹ️ Hyperstatic V2 is underway, featuring way faster rendering speeds, SSR, per-component data fetching methods and more. Stay tuned!
+
 Hyperstatic is a Hyperapp based static site generator with a code-splitting and navigation layer. It's goal is to be a simpler, lighter and faster GatsbyJS, that uses Hyperapp instead of React.
 
 It's codebase also has an inherently smaller footprint by using Puppeteer for pre-rendering and Parcel for code-splitting.
