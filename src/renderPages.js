@@ -51,7 +51,8 @@ const renderPages = async (allPages, port = 54321) => {
     }
 
     // Convert URI path to absolute disk path in the output dir
-    const pageFilePath = pagePath === '/' ? '/index.html' : `${pagePath}/index.html`
+    const pageFilePath =
+      pagePath === '/' ? '/index.html' : `${pagePath}/index.html`
     const pageFileAbsolutePath = path.join(buildPath, pageFilePath)
 
     // Remove basepath from rendered HTML
@@ -64,6 +65,7 @@ const renderPages = async (allPages, port = 54321) => {
       console.log(`Page created: ${pageFileAbsolutePath}`)
     } catch (err) {
       console.error(err)
+      process.exit(1)
     }
   }
 
@@ -80,7 +82,8 @@ const renderPages = async (allPages, port = 54321) => {
   for (let i = 0; i < fetchUrls.length; i++) {
     const url = fetchUrls[i]
     const data = allStaticData[url]
-    const fileName = crypto.createHash('md5').update(url).digest('hex') + '.json'
+    const fileName =
+      crypto.createHash('md5').update(url).digest('hex') + '.json'
     const filePath = '/data/' + fileName
 
     newFetchUrls.push(filePath)
@@ -103,7 +106,7 @@ const renderPages = async (allPages, port = 54321) => {
       countMatches: true
     })
     console.log('Bundles updated! Results: ')
-    results.forEach(result => {
+    results.forEach((result) => {
       if (result.hasChanged) {
         console.log(result)
       }
