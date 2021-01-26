@@ -64,6 +64,7 @@ const renderPages = async (allPages, port = 54321) => {
       console.log(`Page created: ${pageFileAbsolutePath}`)
     } catch (err) {
       console.error(err)
+      process.exit(1)
     }
   }
 
