@@ -56,7 +56,8 @@ const renderPages = async (allPages, port = 54321) => {
 
     // Remove basepath from rendered HTML
     // Ex: <script src="http://localhost/about" /> becomes just <script src="/about" />
-    const cleanedUpHtml = html.split(baseUrl).join('')
+    const cleanedUpHtml = html.replace(new RegExp(baseUrl, 'gi'), '')
+    
 
     try {
       await fse.outputFile(pageFileAbsolutePath, cleanedUpHtml)
