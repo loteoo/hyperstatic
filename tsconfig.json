@@ -2,15 +2,13 @@
   "compilerOptions": {
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "CommonJS",
-    "moduleResolution": "node",
+    "module": "commonjs",
     "esModuleInterop": true,
     "declaration": true,
-    "checkJs": true,
-    "noEmit": true,
+    "outDir": "dist",
   },
   "include": [
     "src/**/*"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

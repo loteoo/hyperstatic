@@ -3,6 +3,9 @@ interface SetPathStatusArgs {
   status: PathStatus;
 }
 
+/**
+ * Set path status for a page
+ */
 const SetPathStatus = (state: State, { path, status }: SetPathStatusArgs): State => ({
   ...state,
   paths: {

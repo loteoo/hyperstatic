@@ -1,10 +1,14 @@
 import SetPathStatus from './SetPathStatus';
+import { LocationState, State } from '../types';
 
 interface InitializePathArgs {
   location: LocationState
   bundle: any;
 }
 
+/**
+ * Run the "init" action if necessary once per page
+ */
 const InitializePath = (state: State, { location, bundle }: InitializePathArgs) => {
   const { path } = location;
 

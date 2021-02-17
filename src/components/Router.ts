@@ -1,6 +1,12 @@
 import { h, text } from 'hyperapp'
 
-const Router = () => ({ state, meta, options }) => {
+/**
+ * Router component to import in user code.
+ *
+ * Renders the correct view depending on the location state
+ *
+ */
+const Router = () => ({ state, meta, options }: ViewContext) => {
   const { route, path } = state.location
   const view = meta[route]?.bundle?.default;
 

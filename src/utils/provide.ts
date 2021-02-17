@@ -1,4 +1,8 @@
-export const provide = (value, node) =>
+/**
+ * Recursively walk the vnode tree, if a function is found,
+ * call it with the given value and repeat
+ */
+const provide = (value, node) =>
   !node
     ? node
     : Array.isArray(node)
@@ -9,3 +13,4 @@ export const provide = (value, node) =>
           ? { ...node, children: provide(value, node.children) }
           : node
 
+export default provide

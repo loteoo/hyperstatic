@@ -2,27 +2,14 @@ import { app, h } from 'hyperapp'
 import { match } from "path-to-regexp";
 import InitializePath from './actions/InitializePath';
 import SetPathStatus from './actions/SetPathStatus';
-import { loadRoute } from './effects/loadRoute';
+import { loadRouteBundle } from './effects/loadRouteBundle';
 import { onLinkEnteredViewPort } from './subscriptions/onLinkEnteredViewPort';
 import onRouteChanged from './subscriptions/onRouteChanged';
 import parseQueryString from './utils/parseQueryString';
-import { provide } from './utils/provide'
+import provide from './utils/provide'
+import { Config, LocationState, State } from './types';
 
-interface Options {
-  initialPath?: string;
-  baseUrl?: string;
-  loader?: (state: State) => any
-  fastClicks?: boolean
-}
 
-interface Config {
-  routes: Record<string, Promise<any>>;
-  options?: Options;
-  init: Record<string, any>;
-  view: (state: State) => any;
-  node: Element;
-  subscriptions?: (state: State) => any[];
-}
 
 const hyperstatic = ({ routes, options, init, view, subscriptions = (_s) => [], ...rest }: Config) => {
 
@@ -68,7 +55,7 @@ const hyperstatic = ({ routes, options, init, view, subscriptions = (_s) => [], 
     if (!bundle) {
       return [
         SetPathStatus(state, { path, status: 'loading' }),
-        loadRoute({ route, path, meta, location })
+        loadRouteBundle({ route, path, meta, location })
       ]
     }
 

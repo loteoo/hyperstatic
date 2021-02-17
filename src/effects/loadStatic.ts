@@ -1,7 +1,14 @@
 import SetPathStatus from '../actions/SetPathStatus';
 import fx from '../utils/fx'
 
-
+/**
+ * Effect runner for the loadStatic effect
+ *
+ * The loadStatic effect, at build time, will cache the data returned from the `loader` promise
+ * and save it as a JSON file in the build files.
+ *
+ * At runtime, it will fetch the pre-saved JSON instead of running the promise
+ */
 const loadStaticRunner = async (dispatch, { path, loader, action, error }) => {
   try {
 

@@ -25,6 +25,11 @@ const subRunner = (dispatch, action) => {
   }
 }
 
+
+/**
+ * Every time a "Link" component enters the viewport,
+ * trigger the given action with the link's path as params
+ */
 export const onLinkEnteredViewPort = ({
   selector,
   action

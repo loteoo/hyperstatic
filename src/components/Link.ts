@@ -1,16 +1,25 @@
 import { h, text } from "hyperapp";
-import { navigate } from "../effects/navigate";
+import PreventDefault from "../actions/PreventDefault";
+import navigate from "../effects/navigate";
+import { State, ViewContext } from '../types';
 
-const PreventDefault = (state: State, ev) => {
-  ev.preventDefault();
-  return state;
-};
+interface LinkProps {
+  href: string;
+  [x: string]: any;
+}
 
-const Link = ({ href, ...rest }, children) => ({
+/**
+ * Link component to import in user code.
+ *
+ * Handles navigation, preloading and
+ * offers info about targeted paths.
+ *
+ */
+const Link = ({ href, ...rest }: LinkProps, children) => ({
   state,
   getLocation,
   PreloadPage,
-}) => {
+}: ViewContext) => {
   const location = getLocation(href);
   const { route, path } = location;
   const status = state.paths[path] ?? "iddle";
