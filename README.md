@@ -1,9 +1,10 @@
-<div align="center">
-  <h1>Hyperstatic</h1>
-  <p>Hyperapp based static site generator</p>
-</div>
+# Hyperstatic
 
-Hyperstatic is a thin code-splitting and navigation layer on top of hyperapp that creates fast and SEO friendly static sites. It's goal is to be a simpler, lighter and faster GatsbyJS, that uses Hyperapp instead of React.
+> Hyperapp based static site generator
+
+Hyperstatic is a thin code-splitting and navigation layer on top of hyperapp that creates fast and SEO friendly static sites. 
+
+It's goal is to be a simpler, lighter and faster GatsbyJS, that uses Hyperapp instead of React.
 
 It's codebase also has an inherently smaller footprint by using Puppeteer for pre-rendering and [dynamic imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#dynamic_imports) for code-splitting.
 
