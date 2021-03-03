@@ -28,7 +28,6 @@ export type PathStatus = 'iddle' | 'loading' | 'fetching' | 'ready' | 'error';
 export interface State {
   location: LocationState;
   paths: Record<string, PathStatus>;
-  fastClicks: boolean;
   [x: string]: any;
 }
 

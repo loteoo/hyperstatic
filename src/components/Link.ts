@@ -17,6 +17,7 @@ interface LinkProps {
  */
 const Link = ({ href, ...rest }: LinkProps, children) => ({
   state,
+  options,
   getLocation,
   PreloadPage,
 }: ViewContext) => {
@@ -24,7 +25,7 @@ const Link = ({ href, ...rest }: LinkProps, children) => ({
   const { route, path } = location;
   const status = state.paths[path] ?? "iddle";
   const active = state.location.path === path;
-  const navigateEventName = state.fastClicks ? "onmousedown" : "onclick";
+  const navigateEventName = options.fastClicks ? "onmousedown" : "onclick";
   const renderChildren = (child) => {
     if (typeof child === "function") {
       const childNode = child({

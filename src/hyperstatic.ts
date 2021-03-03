@@ -74,7 +74,6 @@ const hyperstatic = ({ routes, options, init, view, subscriptions = (_s) => [], 
   const initialState = {
     ...init,
     paths: {},
-    fastClicks: Boolean(options.fastClicks)
   } as State;
 
   return app({
