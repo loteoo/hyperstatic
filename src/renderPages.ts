@@ -6,6 +6,7 @@ import { replaceInFile } from 'replace-in-file'
 import handler from 'serve-handler'
 import http from 'http'
 import events from 'events'
+import yargs from 'yargs'
 
 const createStaticServer = (port, distFolder) =>
   http.createServer((request, response) =>
@@ -17,15 +18,26 @@ const createStaticServer = (port, distFolder) =>
     })
   ).listen(port)
 
+const renderPages = async () => {
 
-interface StaticOptions {
-  port?: number;
-  distFolder?: string;
-  entryPoint?: string;
-  extraPages?: string[]
-}
+  const argv = yargs(process.argv.slice(2))
+    .usage('Usage: $0 [options]')
+    .describe('port', 'Port to use for the prerendering server')
+    .alias('p', 'port')
+    .describe('dist', 'Directory containing built static files from the bundler')
+    .alias('d', 'dist')
+    .describe('entry', 'Entry page to start crawling the site from')
+    .alias('e', 'entry')
+    .describe('extra', 'Comma separated list of paths to render if they aren\'t automatically crawled')
+    .alias('x', 'extra')
+    .argv;
 
-const renderPages = async ({ port = 54322, distFolder = 'dist', entryPoint = '/', extraPages = [] }: StaticOptions) => {
+  // Get command line arguments with defaults
+  const port = argv.port ? Number(argv.port) : 54321
+  const distFolder = argv.dist ? String(argv.dist) : 'dist'
+  const entryPoint = argv.entry ? String(argv.entry) : '/'
+  const extraPages = typeof argv.extra === 'string' ? argv.extra.split(',') : []
+
   try {
 
     // Spin up a static server to use for prerendering with pupeteer
@@ -157,4 +169,4 @@ const renderPages = async ({ port = 54322, distFolder = 'dist', entryPoint = '/'
   process.exit(0)
 }
 
-renderPages({})
+export default renderPages
