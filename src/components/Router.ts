@@ -1,4 +1,5 @@
 import { h, text } from 'hyperapp'
+import { ViewContext } from '../types';
 
 /**
  * Router component to import in user code.

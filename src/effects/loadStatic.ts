@@ -1,4 +1,5 @@
 import SetPathStatus from '../actions/SetPathStatus';
+import { State } from '../types';
 import fx from '../utils/fx'
 
 /**

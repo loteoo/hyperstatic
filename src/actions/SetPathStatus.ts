@@ -1,3 +1,5 @@
+import { PathStatus, State } from '../types'
+
 interface SetPathStatusArgs {
   path: string
   status: PathStatus;
