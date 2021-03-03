@@ -1,13 +1,13 @@
-# Hyperstatic
+<div align="center">
+  <h1>Hyperstatic</h1>
+  <p>Hyperapp based static site generator</p>
+</div>
 
-## ℹ️ Hyperstatic V2 is underway, featuring way faster rendering speeds, SSR, per-component data fetching methods and more. Stay tuned!
+Hyperstatic is a thin code-splitting and navigation layer on top of hyperapp that creates fast and SEO friendly static sites. It's goal is to be a simpler, lighter and faster GatsbyJS, that uses Hyperapp instead of React.
 
-Hyperstatic is a Hyperapp based static site generator with a code-splitting and navigation layer. It's goal is to be a simpler, lighter and faster GatsbyJS, that uses Hyperapp instead of React.
-
-It's codebase also has an inherently smaller footprint by using Puppeteer for pre-rendering and Parcel for code-splitting.
+It's codebase also has an inherently smaller footprint by using Puppeteer for pre-rendering and [dynamic imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#dynamic_imports) for code-splitting.
 
 See the demo site here: https://hyperstatic.dev/
-
 
 
 # Starter template 🚀
@@ -16,42 +16,33 @@ To easiest way to get started is to use this [starter template](https://github.c
 
 ---  
 
-#### Installation in an existing Hyperapp 2.0 project:  
+#### Installation in an existing Hyperapp project:  
 
 1. `npm i hyperstatic`
 
-2. Create a `routes.js` file with your routes in it.   
-[Example](https://github.com/loteoo/hyperstatic-starter/blob/master/src/app/routes.js)
+2. Create a `routes` object with your routes patterns in it.   
+[Example](https://github.com/loteoo/hyperstatic-starter/blob/master/src/main.tsx#L8-L15)
 
 
 
 3. Replace hyperapp's `app` call with `hyperstatic`. Add the extra `routes` attribute that is needed.   
-[Example](https://github.com/loteoo/hyperstatic-starter/blob/master/src/app.js#L18)  
+[Example](https://github.com/loteoo/hyperstatic-starter/blob/master/src/main.tsx#L24)  
 
 
 
 4. Link to your pages using the `<Link>` component.   
-[Example](https://github.com/loteoo/hyperstatic-starter/blob/master/src/app/view.jsx#L7)
+[Example](https://github.com/loteoo/hyperstatic-starter/blob/master/src/components/core/Header/index.tsx#L11)
 
-5. (Optional) For pre-rendering, create a `render-pages.js`, list your URLs and call `renderPages` with them.   
-[Example](https://github.com/loteoo/hyperstatic-starter/blob/master/render-pages.js)
-
-Then add this helper command in your package.json scripts:  
+5. For prerendering, add this helper command in your package.json scripts:  
 
 ```
 "scripts": {
-  "render-pages": "npm run build && node ./render-pages.js"
+  "prerender": "npm run build && hyperstatic"
 }
 ```
 
-
 #### That should be it!
 
+For more info, see https://hyperstatic.dev/
 
-Pull requests are welcome!
-
-
-## Roadmap / planned changes
-- Once an official hyperapp router is available, use it internally and build on top of it.
-- Add "hooks" for animating page transitions (run effects before / after navigating).
-- Move away from pupeteer. Do SSR straight from node.js. New APIs will be available to fetch data at build time, similar to [Next.js](https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation)
+Pull requests are welcome! ❤
