@@ -11,7 +11,7 @@ import { Config, LocationState, State } from './types';
 
 
 
-const hyperstatic = ({ routes, options, init, view, subscriptions = (_s) => [], ...rest }: Config) => {
+const hyperstatic = ({ routes, options = {}, init, view, subscriptions = (_s) => [], ...rest }: Config) => {
 
   // Internal values saved for each routes
   const meta = Object.keys(routes).reduce((obj, route) => {
