@@ -8,6 +8,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "prepublish": "tsc",
     "test": "echo \"No test specified\""
   },
   "dependencies": {
@@ -33,5 +34,5 @@
   "bugs": {
     "url": "https://github.com/loteoo/hyperstatic/issues"
   },
-  "homepage": "https://github.com/loteoo/hyperstatic#readme"
+  "homepage": "https://hyperstatic.dev"
 }
