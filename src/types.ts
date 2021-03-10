@@ -5,6 +5,7 @@ export interface Options {
   baseUrl?: string;
   loader?: (state: State) => any
   fastClicks?: boolean
+  eagerLoad?: boolean
 }
 
 export interface Config {

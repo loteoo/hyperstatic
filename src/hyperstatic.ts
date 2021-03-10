@@ -7,11 +7,16 @@ import { onLinkEnteredViewPort } from './subscriptions/onLinkEnteredViewPort';
 import onRouteChanged from './subscriptions/onRouteChanged';
 import parseQueryString from './utils/parseQueryString';
 import provide from './utils/provide'
-import { Config, LocationState, State } from './types';
+import { Config, LocationState, Options, State } from './types';
 
 
 
-const hyperstatic = ({ routes, options = {}, init, view, subscriptions = (_s) => [], ...rest }: Config) => {
+const hyperstatic = ({ routes, options: userOptions, init, view, subscriptions = (_s) => [], ...rest }: Config) => {
+
+  const options: Options = {
+    eagerLoad: true,
+    ...userOptions
+  }
 
   // Internal values saved for each routes
   const meta = Object.keys(routes).reduce((obj, route) => {
@@ -85,7 +90,7 @@ const hyperstatic = ({ routes, options = {}, init, view, subscriptions = (_s) =>
     subscriptions: (state) => [
       ...subscriptions(state),
       onRouteChanged(LocationChanged),
-      onLinkEnteredViewPort({
+      options.eagerLoad && onLinkEnteredViewPort({
         selector: 'a[data-status=iddle]',
         action: PreloadPage
       })
