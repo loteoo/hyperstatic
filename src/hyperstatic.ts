@@ -76,13 +76,22 @@ const hyperstatic = ({ routes, options: userOptions, init, view, subscriptions =
 
   const initialPath = window.location.pathname + window.location.search;
 
-  const initialState = {
-    ...init,
+  let initialState = Array.isArray(init) ? init[0] : init;
+
+  initialState = {
+    ...initialState,
     paths: {},
   } as State;
 
+  let initAction = LocationChanged(initialState, initialPath);
+
+  if (Array.isArray(init)) {
+    const effects = init.slice(1)
+    initAction = Array.isArray(initAction) ? initAction.concat(effects) : [initAction, ...effects]
+  }
+
   return app({
-    init: LocationChanged(initialState, initialPath),
+    init: initAction,
     view: (state) => provide(
       { state, meta, options, getLocation, PreloadPage },
       h('div', { id: 'app' }, view(state))
