@@ -39,3 +39,8 @@ export interface ViewContext {
   PreloadPage: Action<string>
   LocationChanged: Action<string>
 }
+
+export interface PathInfo extends LocationState {
+  status: PathStatus;
+  active: boolean;
+}

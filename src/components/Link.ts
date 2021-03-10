@@ -1,7 +1,7 @@
-import { h, text } from "hyperapp";
+import { h } from "hyperapp";
 import PreventDefault from "../actions/PreventDefault";
 import navigate from "../effects/navigate";
-import { State, ViewContext } from '../types';
+import { PathInfo, State, ViewContext } from '../types';
 
 interface LinkProps {
   href: string;
@@ -28,15 +28,12 @@ const Link = ({ href, ...rest }: LinkProps, children) => ({
   const navigateEventName = options.fastClicks ? "onmousedown" : "onclick";
   const renderChildren = (child) => {
     if (typeof child === "function") {
-      const childNode = child({
+      const info: PathInfo = {
         ...location,
         status,
         active,
-      });
-      if (typeof childNode === "object" && "node" in childNode) {
-        return childNode;
-      }
-      return text(childNode);
+      };
+      return child(info);
     }
     return child;
   };
