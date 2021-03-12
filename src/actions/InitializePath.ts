@@ -17,20 +17,20 @@ const InitializePath = (state: State, { location, bundle }: InitializePathArgs) 
     return state;
   }
 
-  // If current path doesn't have an "init" to run
-  if (typeof bundle?.init !== 'function') {
+  // If current path doesn't have an "Init" to run
+  if (typeof bundle?.Init !== 'function') {
 
     // Set as ready
     return SetPathStatus(state, { path, status: 'ready' })
   }
 
-  // Compute next state or action tuple using the provided "init" action
-  const action = bundle?.init(
+  // Compute next state or action tuple using the provided "Init" action
+  const action = bundle?.Init(
     state,
     location
   )
 
-  // If has init has side-effects
+  // If Init has side-effects
   if (Array.isArray(action)) {
 
     // Get only the "loadStatic" effect tuples
